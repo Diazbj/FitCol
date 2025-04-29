@@ -3,24 +3,25 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.cliente.ClienteDTO;
 import co.edu.uniquindio.proyecto.dto.cliente.CrearClienteDTO;
 import co.edu.uniquindio.proyecto.dto.cliente.EditarClienteDTO;
-import co.edu.uniquindio.proyecto.mapper.ClienteMapper;
 import co.edu.uniquindio.proyecto.modelo.Cliente;
+import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import co.edu.uniquindio.proyecto.repositorio.ClienteRepo;
 import co.edu.uniquindio.proyecto.servicios.ClienteServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class ClienteServicioImpl implements ClienteServicio {
 
     private final ClienteRepo clienteRepo;
-    private final ClienteMapper clienteMapper;
 
     @Override
     public void crearCliente(CrearClienteDTO crearClienteDTO) {
@@ -32,8 +33,8 @@ public class ClienteServicioImpl implements ClienteServicio {
         // Crear entidad Cliente desde el DTO
         Cliente cliente = new Cliente();
         cliente.setId(crearClienteDTO.getId());
-        cliente.setNombre(crearClienteDTO.getNombre());
-        cliente.setTelefono(crearClienteDTO.getTelefono());
+        cliente.setPrimerNombre(crearClienteDTO.getPrimerApellido());
+        cliente.setSegundoNombre(crearClienteDTO.getSegundoApellido());
         cliente.setPassword(crearClienteDTO.getPassword()); // Deberías encriptar esta contraseña
         cliente.setPrimerApellido(crearClienteDTO.getPrimerApellido());
         cliente.setSegundoApellido(crearClienteDTO.getSegundoApellido());
@@ -44,8 +45,15 @@ public class ClienteServicioImpl implements ClienteServicio {
         cliente.setPeso(crearClienteDTO.getPeso());
         cliente.setAltura(crearClienteDTO.getAltura());
 
-        // Guardar cliente en la base de datos
+        List<UsuarioTelefono> listaTelefonos = crearClienteDTO.getTelefonos()
+                .stream()
+                .map(numero -> new UsuarioTelefono(null, numero, cliente))
+                .collect(Collectors.toList());
+
+        cliente.setTelefonos(listaTelefonos);
+
         clienteRepo.save(cliente);
+
     }
 
     @Override
@@ -74,8 +82,8 @@ public class ClienteServicioImpl implements ClienteServicio {
                 .orElseThrow(() -> new Exception("El cliente con ID " + id + " no existe"));
 
         // Actualizar los campos del cliente
-        cliente.setNombre(editarClienteDTO.getNombre());
-        cliente.setTelefono(editarClienteDTO.getTelefono());
+        cliente.setPrimerNombre(editarClienteDTO.getPrimerNombre());
+        cliente.setSegundoNombre(editarClienteDTO.getSegundoNombre());
         cliente.setPrimerApellido(editarClienteDTO.getPrimerApellido());
         cliente.setSegundoApellido(editarClienteDTO.getSegundoApellido());
         cliente.setSexo(editarClienteDTO.getSexo());

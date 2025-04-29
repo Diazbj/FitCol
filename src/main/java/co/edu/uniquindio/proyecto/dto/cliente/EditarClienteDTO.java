@@ -10,8 +10,8 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 public class EditarClienteDTO {
 
-    private String nombre;
-    private String telefono;
+    private String primerNombre;
+    private String segundoNombre;
     private String primerApellido;
     private String segundoApellido;
     private String sexo;
@@ -19,13 +19,15 @@ public class EditarClienteDTO {
     private Integer altura;
 
 
+
     public EditarClienteDTO(Cliente cliente) {
-        this.nombre = cliente.getNombre();
-        this.telefono = cliente.getTelefono();
+        this.primerNombre= cliente.getPrimerNombre();
+        this.segundoNombre= cliente.getSegundoNombre();
         this.primerApellido = cliente.getPrimerApellido();
         this.segundoApellido = cliente.getSegundoApellido();
         this.sexo = cliente.getSexo();
         this.peso = cliente.getPeso() != null ? cliente.getPeso().intValue() : null;
         this.altura = cliente.getAltura() != null ? cliente.getAltura().intValue() : null;
+
     }
 }
