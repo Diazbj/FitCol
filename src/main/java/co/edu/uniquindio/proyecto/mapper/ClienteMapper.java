@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.cliente.ClienteDTO;
 import co.edu.uniquindio.proyecto.dto.cliente.CrearClienteDTO;
 import co.edu.uniquindio.proyecto.modelo.Cliente;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel="spring")
 public interface ClienteMapper {
