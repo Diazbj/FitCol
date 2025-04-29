@@ -6,6 +6,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -25,7 +26,7 @@ public class Usuario {
     private String password;
     private String primerApellido;
     private String segundoApellido;
-    private LocalDateTime fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private String email;
 
 }

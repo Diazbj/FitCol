@@ -13,6 +13,7 @@ public record ClienteDTO(
         String email,
         String sexo,
         String historialMedico,
+        Integer edad,
         Integer peso,
         Integer altura
 
