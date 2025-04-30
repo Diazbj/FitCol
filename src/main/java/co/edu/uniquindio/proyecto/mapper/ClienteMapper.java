@@ -2,10 +2,12 @@ package co.edu.uniquindio.proyecto.mapper;
 
 import co.edu.uniquindio.proyecto.dto.cliente.ClienteDTO;
 import co.edu.uniquindio.proyecto.dto.cliente.CrearClienteDTO;
+import co.edu.uniquindio.proyecto.dto.cliente.EditarClienteDTO;
 import co.edu.uniquindio.proyecto.modelo.Cliente;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 
 import java.time.LocalDate;
@@ -32,6 +34,9 @@ public interface ClienteMapper {
     default List<String> obtenerTelefonos(List<UsuarioTelefono> telefonos){
         return telefonos.stream().map(UsuarioTelefono::getNumero).toList();
     }
+
+    @Mapping(target = "telefonos", ignore = true) // los telefonos se manejan aparte
+    void actualizarClienteDesdeDTO(EditarClienteDTO dto, @MappingTarget Cliente cliente);
 
 
 }

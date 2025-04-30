@@ -20,7 +20,7 @@ import lombok.Data;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
     @Id
-    private String id;
+    private Long id;
 
     private String primerNombre;
     private String segundoNombre;

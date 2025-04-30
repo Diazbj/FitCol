@@ -73,6 +73,20 @@ public class ClienteServicioImpl implements ClienteServicio {
         Cliente cliente = clienteRepo.findById(id)
                 .orElseThrow(() -> new Exception("El cliente con ID " + id + " no existe"));
 
+        // Actualizar campos básicos con el mapper
+        clienteMapper.actualizarClienteDesdeDTO(editarClienteDTO, cliente);
+
+        // Mapear los teléfonos manualmente (MapStruct no puede manejar relaciones complejas fácilmente)
+        cliente.getTelefonos().clear();
+        List<UsuarioTelefono> nuevosTelefonos = editarClienteDTO.telefonos().stream()
+                .map(numero -> {
+                    UsuarioTelefono telefono = new UsuarioTelefono();
+                    telefono.setNumero(numero);
+                    telefono.setUsuario(cliente); // Relación correcta
+                    return telefono;
+                })
+                .toList();
+        cliente.getTelefonos().addAll(nuevosTelefonos);
 
         // Guardar los cambios
         clienteRepo.save(cliente);
