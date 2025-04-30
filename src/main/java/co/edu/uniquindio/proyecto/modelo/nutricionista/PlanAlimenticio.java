@@ -1,5 +1,6 @@
-package co.edu.uniquindio.proyecto.modelo;
+package co.edu.uniquindio.proyecto.modelo.nutricionista;
 
+import co.edu.uniquindio.proyecto.modelo.Suscripcion;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,13 +12,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "PlanAlimentacion")
+@Table(name = "PlanAlimenticio")
 public class PlanAlimenticio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codPlanAlimentacion")
-    private Long id;
+    private Integer codPlanAlimenticio;
 
     @Column(columnDefinition = "TEXT")
     private String nombre;
@@ -30,14 +29,11 @@ public class PlanAlimenticio {
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    //@ManyToOne
-    //@JoinColumn(name = "Nutricionista_Cliente_Usuario_codigo")
-    //private Nutricionista nutricionista;
-
-    //@OneToMany(mappedBy = "planAlimentacion")
-    //private List<ComidaPlanAlim> comidas;
+    @ManyToOne
+    @JoinColumn(name = "Nutricionista_Cliente_Usuario_codigo")
+    private Nutricionista nutricionista;
 
     @OneToMany(mappedBy = "planAlimentacion")
-    private List<Suscripcion> suscripciones;
+    private List<ComidaPlanAli> comidas;
 
 }

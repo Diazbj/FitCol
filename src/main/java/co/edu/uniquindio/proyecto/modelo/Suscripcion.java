@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.modelo;
 
+import co.edu.uniquindio.proyecto.modelo.entrenador.PlanEntrenamiento;
+import co.edu.uniquindio.proyecto.modelo.nutricionista.PlanAlimenticio;
 import jakarta.persistence.*;
 import lombok.*;
 

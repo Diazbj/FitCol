@@ -1,9 +1,9 @@
-package co.edu.uniquindio.proyecto.dto.cliente;
+package co.edu.uniquindio.proyecto.dto.usuario;
 
 import jakarta.validation.constraints.Email;
 import java.util.List;
 
-public record ClienteDTO(
+public record UsuarioDTO(
         String id,
         String primerNombre,
         String segundoNombre,

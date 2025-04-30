@@ -2,7 +2,7 @@ package co.edu.uniquindio.proyecto.mapper;
 
 
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
-import co.edu.uniquindio.proyecto.modelo.PlanEntrenamiento;
+import co.edu.uniquindio.proyecto.modelo.entrenador.PlanEntrenamiento;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")

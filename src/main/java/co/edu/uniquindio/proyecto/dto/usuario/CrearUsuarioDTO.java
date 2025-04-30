@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.dto.cliente;
+package co.edu.uniquindio.proyecto.dto.usuario;
 
 
 import jakarta.validation.constraints.Email;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 import java.util.List;
 
-public record CrearClienteDTO (
+public record CrearUsuarioDTO(
         @NotBlank @Length(max = 100) String id,
         @NotBlank @Length(max = 100) String primerNombre,
         @NotBlank @Length(max = 100) String segundoNombre,

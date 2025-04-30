@@ -2,8 +2,8 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.mapper.EntrenadorMapper;
-import co.edu.uniquindio.proyecto.modelo.Entrenador;
-import co.edu.uniquindio.proyecto.modelo.PlanEntrenamiento;
+import co.edu.uniquindio.proyecto.modelo.entrenador.Entrenador;
+import co.edu.uniquindio.proyecto.modelo.entrenador.PlanEntrenamiento;
 import co.edu.uniquindio.proyecto.repositorio.EntrenadorRepo;
 import co.edu.uniquindio.proyecto.repositorio.PlanEntrenamientoRepo;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
