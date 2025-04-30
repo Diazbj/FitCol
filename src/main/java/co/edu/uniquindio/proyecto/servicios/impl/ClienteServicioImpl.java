@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.cliente.ClienteDTO;
 import co.edu.uniquindio.proyecto.dto.cliente.CrearClienteDTO;
 import co.edu.uniquindio.proyecto.dto.cliente.EditarClienteDTO;
+import co.edu.uniquindio.proyecto.mapper.ClienteMapper;
 import co.edu.uniquindio.proyecto.modelo.Cliente;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import co.edu.uniquindio.proyecto.repositorio.ClienteRepo;
@@ -22,35 +23,26 @@ import java.util.stream.Collectors;
 public class ClienteServicioImpl implements ClienteServicio {
 
     private final ClienteRepo clienteRepo;
+    private final ClienteMapper clienteMapper;
 
     @Override
     public void crearCliente(CrearClienteDTO crearClienteDTO) {
         // Validar si ya existe un cliente con ese ID
-        if (clienteRepo.existsById(crearClienteDTO.getId())) {
-            throw new IllegalArgumentException("Ya existe un cliente con el ID: " + crearClienteDTO.getId());
+        if (clienteRepo.existsById(crearClienteDTO.id())) {
+            throw new IllegalArgumentException("Ya existe un cliente con el ID: " + crearClienteDTO.id());
         }
 
-        // Crear entidad Cliente desde el DTO
-        Cliente cliente = new Cliente();
-        cliente.setId(crearClienteDTO.getId());
-        cliente.setPrimerNombre(crearClienteDTO.getPrimerApellido());
-        cliente.setSegundoNombre(crearClienteDTO.getSegundoApellido());
-        cliente.setPassword(crearClienteDTO.getPassword()); // Deberías encriptar esta contraseña
-        cliente.setPrimerApellido(crearClienteDTO.getPrimerApellido());
-        cliente.setSegundoApellido(crearClienteDTO.getSegundoApellido());
-        cliente.setFechaNacimiento(LocalDate.parse(crearClienteDTO.getFechaNacimiento())); // Formato ISO
-        cliente.setEmail(crearClienteDTO.getEmail());
-        cliente.setSexo(crearClienteDTO.getSexo());
-        cliente.setHistorialMedico(crearClienteDTO.getHistorialMedico());
-        cliente.setPeso(crearClienteDTO.getPeso());
-        cliente.setAltura(crearClienteDTO.getAltura());
+        Cliente cliente = clienteMapper.fromCrearDTOToEntity(crearClienteDTO);
 
-        List<UsuarioTelefono> listaTelefonos = crearClienteDTO.getTelefonos()
-                .stream()
-                .map(numero -> new UsuarioTelefono(null, numero, cliente))
-                .collect(Collectors.toList());
+        List<UsuarioTelefono> telefonos = crearClienteDTO.telefonos().stream()
+                .map(numero -> {
+                    UsuarioTelefono tel = new UsuarioTelefono();
+                    tel.setNumero(numero);
+                    tel.setUsuario(cliente);
+                    return tel;
+                }).toList();
 
-        cliente.setTelefonos(listaTelefonos);
+        cliente.setTelefonos(telefonos);
 
         clienteRepo.save(cliente);
 
@@ -66,7 +58,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         int edad = calcularEdad(cliente.getFechaNacimiento());
 
         // Retornar el DTO con la edad calculada
-        return new ClienteDTO(cliente, edad);
+        return clienteMapper.fromEntityToDTO(cliente);
     }
 
     @Override
@@ -81,14 +73,6 @@ public class ClienteServicioImpl implements ClienteServicio {
         Cliente cliente = clienteRepo.findById(id)
                 .orElseThrow(() -> new Exception("El cliente con ID " + id + " no existe"));
 
-        // Actualizar los campos del cliente
-        cliente.setPrimerNombre(editarClienteDTO.getPrimerNombre());
-        cliente.setSegundoNombre(editarClienteDTO.getSegundoNombre());
-        cliente.setPrimerApellido(editarClienteDTO.getPrimerApellido());
-        cliente.setSegundoApellido(editarClienteDTO.getSegundoApellido());
-        cliente.setSexo(editarClienteDTO.getSexo());
-        cliente.setPeso(editarClienteDTO.getPeso() != null ? editarClienteDTO.getPeso().doubleValue() : null);
-        cliente.setAltura(editarClienteDTO.getAltura() != null ? editarClienteDTO.getAltura().doubleValue() : null);
 
         // Guardar los cambios
         clienteRepo.save(cliente);
