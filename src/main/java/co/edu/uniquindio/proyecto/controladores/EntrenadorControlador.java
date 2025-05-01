@@ -2,7 +2,10 @@ package co.edu.uniquindio.proyecto.controladores;
 
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
-import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
+import co.edu.uniquindio.proyecto.dto.entrenador.EntrenadorDTO;
+import co.edu.uniquindio.proyecto.dto.entrenador.EditarEntrenadorDTO;
+import co.edu.uniquindio.proyecto.dto.entrenador.CrearEntrenadorDTO;
+import co.edu.uniquindio.proyecto.dto.entrenador.CrearPlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -17,11 +20,39 @@ public class EntrenadorControlador {
 
     private final EntrenadorServicio entrenadorServicio;
 
+    @PostMapping
+    @Operation(summary="Crear Entrenador")
+    public ResponseEntity<MensajeDTO<String>> crearEntrenador(@Valid @RequestBody CrearEntrenadorDTO crearEntrenador)throws Exception{
+        entrenadorServicio.crearEntrenador(crearEntrenador);
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
+    }
+
     @PostMapping("/{id}")
     @Operation(summary = "Crear Plan de Entrenamiento")
     public ResponseEntity<MensajeDTO<String>> crearPlanEntrenamiento(@Valid @RequestBody CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, @PathVariable String id) throws Exception{
         entrenadorServicio.crearPlanEntrenamiento(crearPlanEntrenamientoDTO,id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary="Consultar Entrenador")
+    public ResponseEntity<MensajeDTO<EntrenadorDTO>> obtenerEntrenador(@PathVariable String id)throws Exception{
+        EntrenadorDTO info=entrenadorServicio.obtenerEntrenador(id);
+        return ResponseEntity.ok(new MensajeDTO<>(true, info));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar Entrenador")
+    public ResponseEntity<MensajeDTO<String>> eliminarEntrenador(@PathVariable String id)throws Exception{
+        entrenadorServicio.eliminarEntrenador(id);
+        return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador eliminado"));
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Editar Entrenador")
+    public ResponseEntity<MensajeDTO<String>> editarEntrenador(@PathVariable String id, @Valid @RequestBody EditarEntrenadorDTO editarEntrenador)throws Exception {
+        entrenadorServicio.editarEntrenador(id,editarEntrenador);
+        return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador editado"));
     }
 
 

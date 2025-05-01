@@ -23,7 +23,6 @@ public interface ClienteMapper {
 
     @Mapping(target = "fechaNacimiento", expression = "java(LocalDate.parse(crearClienteDTO.fechaNacimiento()))")
     @Mapping(target = "telefonos", ignore = true)// porque necesitas mapearlos aparte
-    @Mapping(target = "rol", constant = "CLIENTE")
     @Mapping(target = "estadoUsuario", constant = "INACTIVO")
     Cliente fromCrearDTOToEntity(CrearClienteDTO crearClienteDTO);
 

@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.modelo.entrenador;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,16 +14,16 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Rutina {
+public class Ejercicio {
 
     @Id
-    private Long codRutina;
+    private Long codEjercicio;
 
     private String nombre;
 
-    @OneToMany(mappedBy = "rutina")
-    private List<RutinaPlanEnt> rutinaPlanEnts;
+    @Lob
+    private String descripcion;
 
-    @OneToMany(mappedBy = "rutina")
-    private List<EjercicioRutina> ejercicios;
+    @OneToMany(mappedBy = "ejercicio")
+    private List<EjercicioRutina> ejerciciosRutina;
 }

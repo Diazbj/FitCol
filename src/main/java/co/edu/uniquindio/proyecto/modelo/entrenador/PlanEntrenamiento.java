@@ -3,6 +3,8 @@ package co.edu.uniquindio.proyecto.modelo.entrenador;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -30,4 +32,7 @@ public class PlanEntrenamiento {
     @ManyToOne
     @JoinColumn(name = "TipoEntrenamiento_codTipo")
     private TipoEntrenamiento tipoEntrenamiento;
+
+    @OneToMany(mappedBy = "planEntrenamiento")
+    private List<RutinaPlanEnt> rutinaPlanEnts;
 }

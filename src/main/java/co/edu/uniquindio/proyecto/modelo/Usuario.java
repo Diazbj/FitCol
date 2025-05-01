@@ -20,7 +20,7 @@ import lombok.Data;
 @Getter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorValue("TYPE")
+@DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
     @Id
     private Long id;
@@ -30,11 +30,9 @@ public class Usuario {
     private String password;
     private String primerApellido;
     private String segundoApellido;
-    private LocalDate fechaNacimiento;
     private String email;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UsuarioTelefono> telefonos = new ArrayList<>();
-    private Rol rol;
     private EstadoUsuario estadoUsuario;
 
 }

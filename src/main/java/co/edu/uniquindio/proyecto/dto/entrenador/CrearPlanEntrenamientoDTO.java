@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.dto.planEntrenamiento;
+package co.edu.uniquindio.proyecto.dto.entrenador;
 
 public record CrearPlanEntrenamientoDTO(
         String nombre,
