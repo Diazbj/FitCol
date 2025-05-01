@@ -18,7 +18,10 @@ public record CrearClienteDTO(
         @Email String email,
         @NotBlank String sexo,
         List<String> telefonos,
-        String codCiudad
+        String codCiudad,
+        String historialMedico,
+        Integer peso,
+        Integer altura
 ){
 
 }
