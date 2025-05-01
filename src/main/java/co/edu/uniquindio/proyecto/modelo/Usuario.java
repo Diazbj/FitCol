@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.modelo;
 
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
+import co.edu.uniquindio.proyecto.modelo.enums.Rol;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,6 +20,7 @@ import lombok.Data;
 @Getter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorValue("TYPE")
 public class Usuario {
     @Id
     private Long id;
@@ -31,6 +34,7 @@ public class Usuario {
     private String email;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UsuarioTelefono> telefonos = new ArrayList<>();
-
+    private Rol rol;
+    private EstadoUsuario estadoUsuario;
 
 }

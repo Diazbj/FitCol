@@ -1,10 +1,10 @@
-package co.edu.uniquindio.proyecto.dto.usuario;
+package co.edu.uniquindio.proyecto.dto.cliente;
 
 import java.util.List;
 
 
 
-public record EditarUsuarioDTO(
+public record EditarClienteDTO(
         String primerNombre,
         String segundoNombre,
         String primerApellido,
