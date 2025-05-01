@@ -9,18 +9,22 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(SuscripcionId.class)
 public class Suscripcion {
 
+    private Integer duracion;
+    private Double precio;
+    private String nombre;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codSuscripcion;
-
-    private int duracion;
-    private double precio;
-
     @ManyToOne
     @JoinColumn(name = "Cliente_Usuario_codigo")
     private Cliente cliente;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "codFactura")
+    private Factura factura;
 
     @ManyToOne
     @JoinColumn(name = "codPlanEntrenamiento")
@@ -28,13 +32,5 @@ public class Suscripcion {
 
     @ManyToOne
     @JoinColumn(name = "codPlanAlimenticio")
-    private PlanAlimenticio planAlimentacion;
-
-    @ManyToOne
-    @JoinColumn(name = "Factura_codFactura")
-    private Factura factura;
-
-    @ManyToOne
-    @JoinColumn(name = "codBeneficio")
-    private Beneficio beneficio;
+    private PlanAlimenticio planAlimenticio;
 }

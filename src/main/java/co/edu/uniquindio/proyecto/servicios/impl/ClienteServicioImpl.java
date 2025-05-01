@@ -5,7 +5,9 @@ import co.edu.uniquindio.proyecto.dto.cliente.EditarClienteDTO;
 import co.edu.uniquindio.proyecto.dto.cliente.ClienteDTO;
 import co.edu.uniquindio.proyecto.mapper.ClienteMapper;
 import co.edu.uniquindio.proyecto.modelo.Cliente;
+import co.edu.uniquindio.proyecto.modelo.vo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
+import co.edu.uniquindio.proyecto.repositorio.CiudadRepo;
 import co.edu.uniquindio.proyecto.repositorio.ClienteRepo;
 import co.edu.uniquindio.proyecto.servicios.ClienteServicio;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     private final ClienteRepo clienteRepo;
     private final ClienteMapper clienteMapper;
+    private final CiudadRepo ciudadRepo;
 
     @Override
     public void crearCliente(CrearClienteDTO crearClienteDTO) {
@@ -29,7 +32,14 @@ public class ClienteServicioImpl implements ClienteServicio {
             throw new IllegalArgumentException("Ya existe un cliente con el ID: " + crearClienteDTO.id());
         }
 
+        // Buscar la ciudad por ID
+        Ciudad ciudad = ciudadRepo.findById(crearClienteDTO.codCiudad())
+                .orElseThrow(() -> new IllegalArgumentException("La ciudad con ID " + crearClienteDTO.codCiudad() + " no existe"));
+
         Cliente cliente = clienteMapper.fromCrearDTOToEntity(crearClienteDTO);
+        // Asignar la ciudad al cliente
+        cliente.setCiudad(ciudad);
+
 
         List<UsuarioTelefono> telefonos = crearClienteDTO.telefonos().stream()
                 .map(numero -> {

@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.modelo;
 
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.modelo.enums.Rol;
+import co.edu.uniquindio.proyecto.modelo.vo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,5 +35,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UsuarioTelefono> telefonos = new ArrayList<>();
     private EstadoUsuario estadoUsuario;
+
+    @ManyToOne
+    @JoinColumn(name = "ciudad_codCiudad")
+    private Ciudad ciudad;
 
 }

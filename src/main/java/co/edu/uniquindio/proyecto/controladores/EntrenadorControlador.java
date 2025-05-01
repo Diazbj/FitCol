@@ -27,12 +27,6 @@ public class EntrenadorControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
     }
 
-    @PostMapping("/{id}")
-    @Operation(summary = "Crear Plan de Entrenamiento")
-    public ResponseEntity<MensajeDTO<String>> crearPlanEntrenamiento(@Valid @RequestBody CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, @PathVariable String id) throws Exception{
-        entrenadorServicio.crearPlanEntrenamiento(crearPlanEntrenamientoDTO,id);
-        return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
-    }
 
     @GetMapping("/{id}")
     @Operation(summary="Consultar Entrenador")
@@ -55,6 +49,12 @@ public class EntrenadorControlador {
         return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador editado"));
     }
 
+    @PostMapping("/{id}")
+    @Operation(summary = "Crear Plan de Entrenamiento")
+    public ResponseEntity<MensajeDTO<String>> crearPlanEntrenamiento(@Valid @RequestBody CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, @PathVariable String id) throws Exception{
+        entrenadorServicio.crearPlanEntrenamiento(crearPlanEntrenamientoDTO,id);
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
+    }
 
 
 }
