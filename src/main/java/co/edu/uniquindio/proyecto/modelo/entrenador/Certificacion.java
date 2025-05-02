@@ -12,7 +12,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Certificacion {
 
     @Id
@@ -20,9 +19,6 @@ public class Certificacion {
     private Integer codCertificacion;
 
     private String nombre;
-
     private String institucion;
 
-    @OneToMany(mappedBy = "certificacion")
-    private List<EntrenadorCertificacion> entrenadorCertificaciones;
 }

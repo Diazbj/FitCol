@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.controladores;
 
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.dto.nutricionista.TituloDTO;
 import co.edu.uniquindio.proyecto.dto.nutricionista.CrearNutricionistaDTO;
 import co.edu.uniquindio.proyecto.dto.nutricionista.EditarNutricionistaDTO;
 import co.edu.uniquindio.proyecto.dto.nutricionista.NutricionistaDTO;
@@ -47,4 +48,12 @@ public class NutricionistaControlador {
         nutricionistaServicio.editarNutricionista(id,editarNutricionista);
         return ResponseEntity.ok(new MensajeDTO<>(true, "Nutricionista editado"));
     }
+
+    @PostMapping("/Titulo/{id}")
+    @Operation(summary="Subir Titulo Universitario")
+    public ResponseEntity<MensajeDTO<String>> subirTitulo(@Valid @RequestBody TituloDTO tituloDTO, @PathVariable String id)throws Exception{
+        nutricionistaServicio.subirTitulo(tituloDTO,id);
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Su titulo se ha registrado con exito"));
+    }
+
 }

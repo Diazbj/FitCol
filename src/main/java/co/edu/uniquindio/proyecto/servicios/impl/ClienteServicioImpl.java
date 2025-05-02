@@ -28,8 +28,8 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public void crearCliente(CrearClienteDTO crearClienteDTO) {
         // Validar si ya existe un cliente con ese ID
-        if (clienteRepo.existsById(crearClienteDTO.id())) {
-            throw new IllegalArgumentException("Ya existe un cliente con el ID: " + crearClienteDTO.id());
+        if (clienteRepo.existsById(crearClienteDTO.usuarioId())) {
+            throw new IllegalArgumentException("Ya existe un cliente con el ID: " + crearClienteDTO.usuarioId());
         }
 
         // Buscar la ciudad por ID

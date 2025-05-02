@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.modelo.entrenador;
 
 import co.edu.uniquindio.proyecto.modelo.Usuario;
+import co.edu.uniquindio.proyecto.modelo.nutricionista.TituloUniversitario;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Entity
 public class Entrenador extends Usuario {
 
-    private Integer anosExp;
+    private Integer aniosExp;
 
     @OneToMany(mappedBy = "entrenador")
     private List<PlanEntrenamiento> planes;
@@ -22,6 +23,11 @@ public class Entrenador extends Usuario {
     @OneToMany(mappedBy = "entrenador")
     private List<AsesoriaEnt> asesorias;
 
-    @OneToMany(mappedBy = "entrenador")
-    private List<EntrenadorCertificacion> entrenadorCertificaciones;
+    @ManyToMany
+    @JoinTable(
+            name = "EntrenadorCertificacion",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "cod_certificacion")
+    )
+    private List<Certificacion> certificaciones;
 }

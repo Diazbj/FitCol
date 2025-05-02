@@ -15,9 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Nutricionista extends Usuario {
 
-
-    @Column(nullable = false)
-    private int aniosExp;
+    private Integer aniosExp;
 
     @OneToMany(mappedBy = "nutricionista")
     private List<PlanAlimenticio> planes;
@@ -28,8 +26,8 @@ public class Nutricionista extends Usuario {
     @ManyToMany
     @JoinTable(
             name = "NutricionistaTitulo",
-            joinColumns = @JoinColumn(name = "Nut_Usuario_codigo"),
-            inverseJoinColumns = @JoinColumn(name = "codTituloUniver")
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "cod_titulo")
     )
     private List<TituloUniversitario> titulos;
 

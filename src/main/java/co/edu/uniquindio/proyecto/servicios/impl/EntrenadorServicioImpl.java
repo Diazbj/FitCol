@@ -1,16 +1,13 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
-import co.edu.uniquindio.proyecto.dto.entrenador.EntrenadorDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.EditarEntrenadorDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.CrearEntrenadorDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.CrearPlanEntrenamientoDTO;
+import co.edu.uniquindio.proyecto.dto.entrenador.*;
+import co.edu.uniquindio.proyecto.mapper.CertificadoMapper;
 import co.edu.uniquindio.proyecto.mapper.EntrenadorMapper;
 import co.edu.uniquindio.proyecto.mapper.PlanEntrenamientoMapper;
-import co.edu.uniquindio.proyecto.modelo.entrenador.Entrenador;
-import co.edu.uniquindio.proyecto.modelo.entrenador.PlanEntrenamiento;
+import co.edu.uniquindio.proyecto.modelo.entrenador.*;
+import co.edu.uniquindio.proyecto.modelo.vo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
-import co.edu.uniquindio.proyecto.repositorio.EntrenadorRepo;
-import co.edu.uniquindio.proyecto.repositorio.PlanEntrenamientoRepo;
+import co.edu.uniquindio.proyecto.repositorio.*;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -26,27 +23,26 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
     private final EntrenadorMapper entrenadorMapper;
     private final PlanEntrenamientoRepo planEntrenamientoRepo;
     private final PlanEntrenamientoMapper planEntrenamientoMapper;
+    private final CiudadRepo ciudadRepo;
+    private final CertificadoRepo certificadoRepo;
+    private final CertificadoMapper certificadoMapper;
+    private final EntrenadorCertificacionRepo entrenadorCertificacionRepo;
 
-    @Override
-    public void crearPlanEntrenamiento(CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, String id) {
-        PlanEntrenamiento plan = planEntrenamientoMapper.dtoToEntidad(crearPlanEntrenamientoDTO);
-
-        Entrenador entrenador = entrenadorRepo.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Entrenador no encontrado"));
-
-        plan.setEntrenador(entrenador);
-
-        planEntrenamientoRepo.save(plan);
-    }
 
     @Override
     public void crearEntrenador(CrearEntrenadorDTO crearEntrenadorDTO)throws Exception{
         // Validar si ya existe un entrenador con ese ID
-        if (entrenadorRepo.existsById(crearEntrenadorDTO.id())) {
-            throw new IllegalArgumentException("Ya existe un entrenador con el ID: " + crearEntrenadorDTO.id());
+        if (entrenadorRepo.existsById(crearEntrenadorDTO.usuarioId())) {
+            throw new IllegalArgumentException("Ya existe un entrenador con el ID: " + crearEntrenadorDTO.usuarioId());
         }
 
+        // Buscar la ciudad por ID
+        Ciudad ciudad = ciudadRepo.findById(crearEntrenadorDTO.codCiudad())
+                .orElseThrow(() -> new IllegalArgumentException("La ciudad con ID " + crearEntrenadorDTO.codCiudad() + " no existe"));
+
         Entrenador entrenador = entrenadorMapper.fromCrearDTOToEntity(crearEntrenadorDTO);
+
+        entrenador.setCiudad(ciudad);
 
         List<UsuarioTelefono> telefonos = crearEntrenadorDTO.telefonos().stream()
                 .map(numero -> {
@@ -89,6 +85,47 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
 
         // Guardar los cambios
         entrenadorRepo.save(entrenador);
+    }
+
+    @Override
+    public void crearPlanEntrenamiento(CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, String id) {
+        Entrenador entrenador = entrenadorRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Entrenador no encontrado"));
+
+        PlanEntrenamiento plan = planEntrenamientoMapper.dtoToEntidad(crearPlanEntrenamientoDTO);
+
+        plan.setEntrenador(entrenador);
+
+        planEntrenamientoRepo.save(plan);
+    }
+
+    @Override
+    public void subirCertificado(CertificacionDTO certificacionDTO, String id) throws Exception {
+        // 1. Buscar el entrenador por ID
+        Entrenador entrenador = entrenadorRepo.findById(id)
+                .orElseThrow(() -> new Exception("El entrenador con ID " + id + " no existe"));
+
+        // 2. Mapear y guardar la certificación
+        Certificacion certificacion = certificadoMapper.fromCrearDTOtoEntity(certificacionDTO);
+        certificacion = certificadoRepo.save(certificacion); // <--- asegurar que tenga el ID
+
+        if (certificacion.getCodCertificacion() == null) {
+            throw new Exception("Error: No se generó un ID de certificación.");
+        }
+
+        // 3. Crear ID compuesto y relación
+        EntrenadorCertificacionId relacionId = new EntrenadorCertificacionId(
+                certificacion.getCodCertificacion(),
+                entrenador.getUsuarioId() // <-- verifica que este campo sea el mismo de tu PK
+        );
+
+        System.out.println("Certificación ID: " + certificacion.getCodCertificacion());
+        System.out.println("Entrenador ID: " + entrenador.getUsuarioId());
+
+        EntrenadorCertificacion relacion = new EntrenadorCertificacion(relacionId, entrenador, certificacion);
+
+        // 4. Guardar la relación
+        entrenadorCertificacionRepo.save(relacion);
     }
 
 

@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import java.util.List;
 
 public record CrearClienteDTO(
-        @NotBlank @Length(max = 100) String id,
+        @NotBlank @Length(max = 100) String usuarioId,
         @NotBlank @Length(max = 100) String primerNombre,
         @NotBlank @Length(max = 100) String segundoNombre,
         @NotBlank @Length(min = 7, max = 20) String password,

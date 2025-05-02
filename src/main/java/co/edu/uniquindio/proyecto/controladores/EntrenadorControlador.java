@@ -2,10 +2,7 @@ package co.edu.uniquindio.proyecto.controladores;
 
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.EntrenadorDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.EditarEntrenadorDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.CrearEntrenadorDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.CrearPlanEntrenamientoDTO;
+import co.edu.uniquindio.proyecto.dto.entrenador.*;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -49,11 +46,18 @@ public class EntrenadorControlador {
         return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador editado"));
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/Plan/{id}")
     @Operation(summary = "Crear Plan de Entrenamiento")
     public ResponseEntity<MensajeDTO<String>> crearPlanEntrenamiento(@Valid @RequestBody CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, @PathVariable String id) throws Exception{
         entrenadorServicio.crearPlanEntrenamiento(crearPlanEntrenamientoDTO,id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
+    }
+
+    @PostMapping("/Certificados/{id}")
+    @Operation(summary="Subir Certificados")
+    public ResponseEntity<MensajeDTO<String>> subirCertificado(@Valid @RequestBody CertificacionDTO certificacionDTO, @PathVariable String id)throws Exception{
+        entrenadorServicio.subirCertificado(certificacionDTO,id);
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Su certificado se ha registrado con exito"));
     }
 
 

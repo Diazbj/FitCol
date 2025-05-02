@@ -1,14 +1,11 @@
 package co.edu.uniquindio.proyecto.modelo;
 
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
-import co.edu.uniquindio.proyecto.modelo.enums.Rol;
 import co.edu.uniquindio.proyecto.modelo.vo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +21,7 @@ import lombok.Data;
 @DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
     @Id
-    private Long id;
+    private Long usuarioId;
 
     private String primerNombre;
     private String segundoNombre;
@@ -37,7 +34,7 @@ public class Usuario {
     private EstadoUsuario estadoUsuario;
 
     @ManyToOne
-    @JoinColumn(name = "ciudad_codCiudad")
+    @JoinColumn(name = "codCiudad")
     private Ciudad ciudad;
 
 }

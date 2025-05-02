@@ -8,18 +8,16 @@ import java.util.List;
 
 public record CrearNutricionistaDTO(
 
-        @NotBlank @Length(max = 100) String id,
+        @NotBlank @Length(max = 100) String usuarioId,
         @NotBlank @Length(max = 100) String primerNombre,
         @NotBlank @Length(max = 100) String segundoNombre,
-        @NotBlank @Length(min = 7, max = 20) String password,
         @NotBlank @Length(max = 100) String primerApellido,
         @NotBlank @Length(max = 100) String segundoApellido,
-        @NotBlank @Length(max = 50)
-        @Email String email,
+        @NotBlank @Length(min = 7, max = 20) String password,
+        @NotBlank @Length(max = 50) @Email String email,
         List<String> telefonos,
-        Long codCiudad,
-        Integer aniosExp,
-        List<Long> codCertificaciones
+        String codCiudad,
+        Integer aniosExp
 
 ) {
 }

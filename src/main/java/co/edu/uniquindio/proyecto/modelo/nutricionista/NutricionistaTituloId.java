@@ -1,4 +1,5 @@
-package co.edu.uniquindio.proyecto.modelo.entrenador;
+package co.edu.uniquindio.proyecto.modelo.nutricionista;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -14,11 +15,12 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntrenadorCertificacionId implements Serializable {
+public class NutricionistaTituloId implements Serializable {
 
-    @Column(name = "cod_certificacion")
-    private Integer codCertificacion;
+    @Column(name="cod_titulo")
+    private Integer codTitulo;
 
-    @Column(name = "usuario_id")
+    @Column(name="usuario_id")
     private Long usuarioId;
+
 }

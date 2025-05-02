@@ -12,21 +12,19 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class EntrenadorCertificacion {
 
     @EmbeddedId
     private EntrenadorCertificacionId id;
 
     @ManyToOne
-    @MapsId("entrenadorCodigo")
-    @JoinColumn(name = "Entrenador_Usuario_codigo")
+    @MapsId("usuarioId")
+    @JoinColumn(name = "usuario_id")
     private Entrenador entrenador;
 
     @ManyToOne
     @MapsId("codCertificacion")
-    @JoinColumn(name = "codCertificacion")
+    @JoinColumn(name = "cod_certificacion")
     private Certificacion certificacion;
 
-    private LocalDate fechaAsignacion;
 }

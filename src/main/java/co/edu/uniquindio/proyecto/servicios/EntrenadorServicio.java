@@ -1,9 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.dto.entrenador.CrearEntrenadorDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.CrearPlanEntrenamientoDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.EditarEntrenadorDTO;
-import co.edu.uniquindio.proyecto.dto.entrenador.EntrenadorDTO;
+import co.edu.uniquindio.proyecto.dto.entrenador.*;
+import jakarta.validation.Valid;
 
 public interface EntrenadorServicio {
 
@@ -12,4 +10,5 @@ public interface EntrenadorServicio {
     EntrenadorDTO obtenerEntrenador(String id) throws Exception;
     void eliminarEntrenador(String id) throws Exception;
     void editarEntrenador(String id, EditarEntrenadorDTO editarEntrenadorDTO) throws Exception;
+    void subirCertificado(CertificacionDTO certificacionDTO,String id) throws Exception;
 }

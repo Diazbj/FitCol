@@ -9,7 +9,6 @@ public record EditarClienteDTO(
         String segundoNombre,
         String primerApellido,
         String segundoApellido,
-        String sexo,
         Integer peso,
         Integer altura,
         List<String> telefonos
