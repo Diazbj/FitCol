@@ -22,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class NutricionistaServicioImpl implements NutricionistaServicio {
@@ -85,6 +87,17 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
         // Actualizar campos básicos con el mapper
         nutricionistaMapper.actualizarNutricionistaDesdeDTO(editarNutricionistaDTO, nutricionista);
 
+        // Mapear los teléfonos manualmente (MapStruct no puede manejar relaciones complejas fácilmente)
+        nutricionista.getTelefonos().clear();
+        List<UsuarioTelefono> nuevosTelefonos = editarNutricionistaDTO.telefonos().stream()
+                .map(numero -> {
+                    UsuarioTelefono telefono = new UsuarioTelefono();
+                    telefono.setNumero(numero);
+                    telefono.setUsuario(nutricionista); // Relación correcta
+                    return telefono;
+                })
+                .toList();
+        nutricionista.getTelefonos().addAll(nuevosTelefonos);
 
         // Guardar los cambios
         nutricionistaRepo.save(nutricionista);
@@ -117,6 +130,49 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
 
         // 4. Guardar la relación
         nutricionistaTituloRepo.save(relacion);
+    }
+
+    @Override
+    public void editarTitulo(TituloDTO tituloDTO, String id) throws Exception {
+        TituloUniversitario titulo = tituloRepo.findById(id)
+                .orElseThrow(() -> new Exception("Título no encontrado"));
+
+        titulo.setNombre(tituloDTO.nombre());
+        titulo.setInstitucion(tituloDTO.institucion());
+
+        tituloRepo.save(titulo);
+    }
+
+    @Override
+    public void eliminarTitulo(String id) throws Exception {
+        TituloUniversitario titulo = tituloRepo.findById(id)
+                .orElseThrow(() -> new Exception("Título no encontrado"));
+
+        // Opción: eliminar relaciones en la tabla intermedia si lo necesitas
+        titulo.getNutricionistas().forEach(n -> n.getTitulos().remove(titulo));
+
+        tituloRepo.delete(titulo);
+    }
+
+    @Override
+    public TituloDTO obtenerTitulo(String id) throws Exception {
+        TituloUniversitario titulo = tituloRepo.findById(id)
+                .orElseThrow(() -> new Exception("Título no encontrado"));
+
+        return tituloMapper.toDTO(titulo);
+    }
+
+
+    @Override
+    public List<TituloDTO> obtenerTitulos(String id) throws Exception {
+        Nutricionista nutricionista = nutricionistaRepo.findById(id)
+                .orElseThrow(() -> new Exception("Nutricionista no encontrado"));
+
+        List<TituloUniversitario> titulos = nutricionista.getTitulos();
+
+        return titulos.stream()
+                .map(tituloMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
 }

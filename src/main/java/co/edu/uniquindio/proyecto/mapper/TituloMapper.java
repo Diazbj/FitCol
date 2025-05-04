@@ -10,4 +10,6 @@ import org.mapstruct.Mapper;
 public interface TituloMapper {
 
     TituloUniversitario fromCrearDTOtoEntity(TituloDTO tituloDTO);
+    // De entidad a DTO (este lo necesitas agregar)
+    TituloDTO toDTO(TituloUniversitario tituloUniversitario);
 }

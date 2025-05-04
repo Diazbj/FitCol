@@ -82,6 +82,18 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
         // Actualizar campos básicos con el mapper
         entrenadorMapper.actualizarEntrenadorDesdeDTO(editarEntrenadorDTO, entrenador);
 
+        // Mapear los teléfonos manualmente (MapStruct no puede manejar relaciones complejas fácilmente)
+       entrenador.getTelefonos().clear();
+        List<UsuarioTelefono> nuevosTelefonos = editarEntrenadorDTO.telefonos().stream()
+                .map(numero -> {
+                    UsuarioTelefono telefono = new UsuarioTelefono();
+                    telefono.setNumero(numero);
+                    telefono.setUsuario(entrenador); // Relación correcta
+                    return telefono;
+                })
+                .toList();
+       entrenador.getTelefonos().addAll(nuevosTelefonos);
+
 
         // Guardar los cambios
         entrenadorRepo.save(entrenador);
