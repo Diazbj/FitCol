@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.entrenador.*;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/Entrenador")
+@RequestMapping("/api/entrenador")
 public class EntrenadorControlador {
 
     private final EntrenadorServicio entrenadorServicio;
@@ -46,14 +47,14 @@ public class EntrenadorControlador {
         return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador editado"));
     }
 
-    @PostMapping("/Plan/{id}")
+    @PostMapping("/plan/{id}")
     @Operation(summary = "Crear Plan de Entrenamiento")
     public ResponseEntity<MensajeDTO<String>> crearPlanEntrenamiento(@Valid @RequestBody CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, @PathVariable String id) throws Exception{
         entrenadorServicio.crearPlanEntrenamiento(crearPlanEntrenamientoDTO,id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
     }
 
-    @PostMapping("/Certificados/{id}")
+    @PostMapping("/certificados/{id}")
     @Operation(summary="Subir Certificados")
     public ResponseEntity<MensajeDTO<String>> subirCertificado(@Valid @RequestBody CertificacionDTO certificacionDTO, @PathVariable String id)throws Exception{
         entrenadorServicio.subirCertificado(certificacionDTO,id);

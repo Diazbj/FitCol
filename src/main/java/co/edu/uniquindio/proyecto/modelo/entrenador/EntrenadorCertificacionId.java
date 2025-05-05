@@ -20,5 +20,5 @@ public class EntrenadorCertificacionId implements Serializable {
     private Integer codCertificacion;
 
     @Column(name = "usuario_id")
-    private Long usuarioId;
+    private String usuarioId;
 }

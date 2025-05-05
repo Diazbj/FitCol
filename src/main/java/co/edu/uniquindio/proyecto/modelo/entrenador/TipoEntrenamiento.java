@@ -12,6 +12,7 @@ import java.util.List;
 public class TipoEntrenamiento {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codTipo;
 
     @Column(nullable = false, length = 50)

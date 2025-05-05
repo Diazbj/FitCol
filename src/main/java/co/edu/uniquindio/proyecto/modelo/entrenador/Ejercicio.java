@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.modelo.entrenador;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +14,7 @@ import java.util.List;
 public class Ejercicio {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codEjercicio;
 
     private String nombre;

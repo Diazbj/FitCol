@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.modelo.entrenador;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +14,7 @@ import java.util.List;
 public class Rutina {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codRutina;
 
     private String nombre;

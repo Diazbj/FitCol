@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.entrenador.*;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.mapper.CertificadoMapper;
 import co.edu.uniquindio.proyecto.mapper.EntrenadorMapper;
 import co.edu.uniquindio.proyecto.mapper.PlanEntrenamientoMapper;
@@ -104,7 +105,7 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
         Entrenador entrenador = entrenadorRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Entrenador no encontrado"));
 
-        PlanEntrenamiento plan = planEntrenamientoMapper.dtoToEntidad(crearPlanEntrenamientoDTO);
+        PlanEntrenamiento plan = planEntrenamientoMapper.fromDTO(crearPlanEntrenamientoDTO);
 
         plan.setEntrenador(entrenador);
 

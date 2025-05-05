@@ -21,7 +21,7 @@ import lombok.Data;
 @DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
     @Id
-    private Long usuarioId;
+    private String usuarioId;
 
     private String primerNombre;
     private String segundoNombre;

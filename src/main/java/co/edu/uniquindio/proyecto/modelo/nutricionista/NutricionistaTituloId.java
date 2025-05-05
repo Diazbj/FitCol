@@ -21,6 +21,6 @@ public class NutricionistaTituloId implements Serializable {
     private Integer codTitulo;
 
     @Column(name="usuario_id")
-    private Long usuarioId;
+    private String usuarioId;
 
 }

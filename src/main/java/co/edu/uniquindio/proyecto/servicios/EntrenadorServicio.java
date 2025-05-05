@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.dto.entrenador.*;
-import jakarta.validation.Valid;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
 
 public interface EntrenadorServicio {
 

@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class EjercicioRutinaId implements Serializable {
-    private Long rutina;
-    private Long ejercicio;
-}
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public class EjercicioRutinaId implements Serializable {
+        private Long rutina;
+        private Long ejercicio;
+    }
