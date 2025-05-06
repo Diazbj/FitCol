@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/nutricionista")
+@RequestMapping("/api/nutricionistas")
 public class NutricionistaControlador {
 
     private final NutricionistaServicio nutricionistaServicio;
