@@ -15,9 +15,9 @@ public class ComidaPlanAli {
     private ComidaPlanAliId id;
 
     @ManyToOne
-    @MapsId("cod_plan_alimentacion") // nombre del atributo en ComidaPlanAliId
-    @JoinColumn(name = "cod_plan_alimentacion")
-    private PlanAlimenticio planAlimentacion;
+    @MapsId("cod_plan_alimenticio") // nombre del atributo en ComidaPlanAliId
+    @JoinColumn(name = "cod_plan_alimenticio")
+    private PlanAlimenticio planAlimenticio;
 
     @ManyToOne
     @MapsId("cod_comida") // nombre del atributo en ComidaPlanAliId

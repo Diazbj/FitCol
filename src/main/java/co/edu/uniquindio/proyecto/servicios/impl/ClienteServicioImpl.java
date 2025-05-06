@@ -11,6 +11,9 @@ import co.edu.uniquindio.proyecto.repositorio.CiudadRepo;
 import co.edu.uniquindio.proyecto.repositorio.ClienteRepo;
 import co.edu.uniquindio.proyecto.servicios.ClienteServicio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     private final ClienteRepo clienteRepo;
     private final ClienteMapper clienteMapper;
     private final CiudadRepo ciudadRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void crearCliente(CrearClienteDTO crearClienteDTO) {
@@ -39,6 +43,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         Cliente cliente = clienteMapper.fromCrearDTOToEntity(crearClienteDTO);
         // Asignar la ciudad al cliente
         cliente.setCiudad(ciudad);
+        cliente.setPassword(passwordEncoder.encode(crearClienteDTO.password()));
 
 
         List<UsuarioTelefono> telefonos = crearClienteDTO.telefonos().stream()
@@ -56,13 +61,16 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public ClienteDTO obtenerCliente(String id)throws Exception{
+    public ClienteDTO obtenerCliente()throws Exception{
+
+        String id = obtenerIdSesion();
         // Buscar el cliente por ID
         Cliente cliente = clienteRepo.findById(id)
                 .orElseThrow(() -> new Exception("El cliente con ID " + id + " no existe"));
 
         // Calcular la edad
         int edad = calcularEdad(cliente.getFechaNacimiento());
+        cliente.setUsuarioId(id);
 
         // Retornar el DTO con la edad calculada
         return clienteMapper.fromEntityToDTO(cliente);
@@ -75,7 +83,9 @@ public class ClienteServicioImpl implements ClienteServicio {
         clienteRepo.deleteById(id);
     }
     @Override
-    public void editarCliente(String id, EditarClienteDTO editarClienteDTO)throws Exception{
+    public void editarCliente( EditarClienteDTO editarClienteDTO)throws Exception{
+
+        String id = obtenerIdSesion();
         // Buscar el cliente por ID
         Cliente cliente = clienteRepo.findById(id)
                 .orElseThrow(() -> new Exception("El cliente con ID " + id + " no existe"));
@@ -101,6 +111,10 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     public int calcularEdad(LocalDate fechaNacimiento) {
         return Period.between(fechaNacimiento, LocalDate.now()).getYears();
+    }
+    public String obtenerIdSesion(){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return user.getUsername();
     }
 
 

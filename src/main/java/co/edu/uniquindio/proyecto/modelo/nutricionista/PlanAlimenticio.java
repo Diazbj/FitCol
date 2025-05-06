@@ -16,7 +16,7 @@ import java.util.List;
 public class PlanAlimenticio {
 
     @Id
-    private Integer codPlanAlimenticio;
+    private Long codPlanAlimenticio;
 
     @Column(columnDefinition = "TEXT")
     private String nombre;
@@ -33,7 +33,7 @@ public class PlanAlimenticio {
     @JoinColumn(name = "Nutricionista_Cliente_Usuario_codigo")
     private Nutricionista nutricionista;
 
-    @OneToMany(mappedBy = "planAlimentacion")
+    @OneToMany(mappedBy = "planAlimenticio")
     private List<ComidaPlanAli> comidas;
 
 }

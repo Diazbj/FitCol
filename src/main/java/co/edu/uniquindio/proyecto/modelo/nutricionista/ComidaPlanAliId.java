@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Embeddable
 public class ComidaPlanAliId {
-    private Long cod_plan_alimentacion;
+    private Long cod_plan_alimenticio;
     private Long cod_comida;
 }

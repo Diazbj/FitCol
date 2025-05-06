@@ -18,7 +18,7 @@ public class Suscripcion {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "Cliente_Usuario_codigo")
+    @JoinColumn(name = "usuario_id")
     private Cliente cliente;
 
     @Id

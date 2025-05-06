@@ -10,6 +10,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AsesoriaAlimId implements Serializable {
-    private Long nutricionista;
-    private Long cliente;
+    private String nutricionista;
+    private String cliente;
 }

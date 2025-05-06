@@ -6,7 +6,7 @@ import co.edu.uniquindio.proyecto.dto.cliente.EditarClienteDTO;
 
 public interface ClienteServicio {
     void crearCliente(CrearClienteDTO crearClienteDTO) throws Exception;
-    ClienteDTO obtenerCliente(String id) throws Exception;
+    ClienteDTO obtenerCliente() throws Exception;
     void eliminarCliente(String id) throws Exception;
-    void editarCliente(String id, EditarClienteDTO editarClienteDTO) throws Exception;
+    void editarCliente(EditarClienteDTO editarClienteDTO) throws Exception;
 }

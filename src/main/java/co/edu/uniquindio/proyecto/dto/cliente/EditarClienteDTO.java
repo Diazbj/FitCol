@@ -9,8 +9,8 @@ public record EditarClienteDTO(
         String segundoNombre,
         String primerApellido,
         String segundoApellido,
+        String historialMedico,
         Integer peso,
-        Integer altura,
         List<String> telefonos
 
 ) {

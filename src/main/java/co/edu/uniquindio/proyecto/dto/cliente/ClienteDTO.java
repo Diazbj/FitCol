@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 import java.util.List;
 
 public record ClienteDTO(
-        String id,
+        String usuarioId,
         String primerNombre,
         String segundoNombre,
         String primerApellido,

@@ -10,6 +10,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SuscripcionId implements Serializable {
-    private Long cliente;
+    private String cliente;
     private Long factura;
 }

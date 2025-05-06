@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class AsesoriaEntId {
 
-    private Long entrenador;
-    private Long cliente;
+    private String entrenador;
+    private String cliente;
     private LocalDate fecha;
 }

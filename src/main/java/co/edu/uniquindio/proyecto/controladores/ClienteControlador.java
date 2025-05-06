@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.cliente.ClienteDTO;
 import co.edu.uniquindio.proyecto.dto.cliente.EditarClienteDTO;
 import co.edu.uniquindio.proyecto.servicios.ClienteServicio;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,11 @@ public class ClienteControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
     }
 
-    @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping()
     @Operation(summary="Consultar Cliente")
-    public ResponseEntity<MensajeDTO<ClienteDTO>> obtenerCliente(@PathVariable String id)throws Exception{
-        ClienteDTO info=clienteServicio.obtenerCliente(id);
+    public ResponseEntity<MensajeDTO<ClienteDTO>> obtenerCliente()throws Exception{
+        ClienteDTO info=clienteServicio.obtenerCliente();
         return ResponseEntity.ok(new MensajeDTO<>(true, info));
     }
 
@@ -39,10 +41,10 @@ public class ClienteControlador {
         return ResponseEntity.ok(new MensajeDTO<>(true, "Cliente eliminado"));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     @Operation(summary = "Editar Cliente")
-    public ResponseEntity<MensajeDTO<String>> editarCliente(@PathVariable String id, @Valid @RequestBody EditarClienteDTO editarCliente)throws Exception {
-        clienteServicio.editarCliente(id,editarCliente);
+    public ResponseEntity<MensajeDTO<String>> editarCliente(@Valid @RequestBody EditarClienteDTO editarCliente)throws Exception {
+        clienteServicio.editarCliente(editarCliente);
         return ResponseEntity.ok(new MensajeDTO<>(true, "Cliente editado"));
     }
 
