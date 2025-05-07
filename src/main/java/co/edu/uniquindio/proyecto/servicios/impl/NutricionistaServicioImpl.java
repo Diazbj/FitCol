@@ -19,6 +19,7 @@ import co.edu.uniquindio.proyecto.repositorio.NutricionistaTituloRepo;
 import co.edu.uniquindio.proyecto.repositorio.TituloRepo;
 import co.edu.uniquindio.proyecto.servicios.NutricionistaServicio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
     private final TituloMapper tituloMapper;
     private final NutricionistaTituloRepo nutricionistaTituloRepo;
     private final CiudadRepo ciudadRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void crearNutricionista(CrearNutricionistaDTO crearNutricionistaDTO)throws Exception{
@@ -41,13 +43,7 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
         if (nutricionistaRepo.existsById(crearNutricionistaDTO.usuarioId())) {
             throw new IllegalArgumentException("Ya existe un nutricionista con el ID: " + crearNutricionistaDTO.usuarioId());
         }
-        // Buscar la ciudad por ID
-        Ciudad ciudad = ciudadRepo.findById(crearNutricionistaDTO.codCiudad())
-                .orElseThrow(() -> new IllegalArgumentException("La ciudad con ID " + crearNutricionistaDTO.codCiudad() + " no existe"));
-
         Nutricionista nutricionista = nutricionistaMapper.fromCrearDTOToEntity(crearNutricionistaDTO);
-
-        nutricionista.setCiudad(ciudad);
 
         List<UsuarioTelefono> telefonos = crearNutricionistaDTO.telefonos().stream()
                 .map(numero -> {
@@ -58,6 +54,7 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
                 }).toList();
 
         nutricionista.setTelefonos(telefonos);
+        nutricionista.setPassword(passwordEncoder.encode(crearNutricionistaDTO.password()));
 
         nutricionistaRepo.save(nutricionista);
     }

@@ -16,7 +16,6 @@ public record CrearNutricionistaDTO(
         @NotBlank @Length(min = 7, max = 20) String password,
         @NotBlank @Length(max = 50) @Email String email,
         List<String> telefonos,
-        String codCiudad,
         Integer aniosExp
 
 ) {

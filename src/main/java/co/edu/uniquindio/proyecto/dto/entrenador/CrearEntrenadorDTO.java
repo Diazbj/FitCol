@@ -16,8 +16,7 @@ public record CrearEntrenadorDTO(
         @NotBlank @Length(max = 50) @Email String email,
         @NotBlank @Length(min = 7, max = 20) String password,
         Integer aniosExp,
-        List<String> telefonos,
-        String codCiudad
+        List<String> telefonos
 
 ) {
 }
