@@ -12,10 +12,11 @@ public record ClienteDTO(
         @Email String email,
         String sexo,
         String historialMedico,
-        Integer edad,
+        String fechaNacimiento,
         Integer peso,
         Integer altura,
-        List<String> telefonos
+        List<String> telefonos,
+        Long codCiudad
 ){
 
 }

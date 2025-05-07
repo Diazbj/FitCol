@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", imports = LocalDate.class)
 public interface ClienteMapper {
 
-    @Mapping(target = "edad", source = "fechaNacimiento", qualifiedByName = "calcularEdad")
+    //@Mapping(target = "edad", source = "fechaNacimiento", qualifiedByName = "calcularEdad")
     @Mapping(target = "telefonos", source = "telefonos", qualifiedByName = "obtenerTelefonos")
     ClienteDTO fromEntityToDTO(Cliente usuario);
 

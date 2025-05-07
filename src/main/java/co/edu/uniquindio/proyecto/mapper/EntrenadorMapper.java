@@ -21,6 +21,7 @@ public interface EntrenadorMapper {
 
     @Mapping(target = "telefonos", ignore = true)// porque necesitas mapearlos aparte
     @Mapping(target = "estadoUsuario", constant = "INACTIVO")
+    @Mapping(target = "password", ignore = true)
     Entrenador fromCrearDTOToEntity(CrearEntrenadorDTO crearEntrenadorDTO);
 
     @Named("obtenerTelefonos")

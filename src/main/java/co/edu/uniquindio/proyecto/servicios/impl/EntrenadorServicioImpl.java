@@ -12,6 +12,7 @@ import co.edu.uniquindio.proyecto.repositorio.*;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
     private final CertificadoRepo certificadoRepo;
     private final CertificadoMapper certificadoMapper;
     private final EntrenadorCertificacionRepo entrenadorCertificacionRepo;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -37,13 +39,8 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
             throw new IllegalArgumentException("Ya existe un entrenador con el ID: " + crearEntrenadorDTO.usuarioId());
         }
 
-        // Buscar la ciudad por ID
-        Ciudad ciudad = ciudadRepo.findById(crearEntrenadorDTO.codCiudad())
-                .orElseThrow(() -> new IllegalArgumentException("La ciudad con ID " + crearEntrenadorDTO.codCiudad() + " no existe"));
-
         Entrenador entrenador = entrenadorMapper.fromCrearDTOToEntity(crearEntrenadorDTO);
 
-        entrenador.setCiudad(ciudad);
 
         List<UsuarioTelefono> telefonos = crearEntrenadorDTO.telefonos().stream()
                 .map(numero -> {
@@ -54,6 +51,7 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
                 }).toList();
 
         entrenador.setTelefonos(telefonos);
+        entrenador.setPassword(passwordEncoder.encode(crearEntrenadorDTO.password()));
 
         entrenadorRepo.save(entrenador);
     }
@@ -132,8 +130,6 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
                 entrenador.getUsuarioId() // <-- verifica que este campo sea el mismo de tu PK
         );
 
-        System.out.println("Certificación ID: " + certificacion.getCodCertificacion());
-        System.out.println("Entrenador ID: " + entrenador.getUsuarioId());
 
         EntrenadorCertificacion relacion = new EntrenadorCertificacion(relacionId, entrenador, certificacion);
 
