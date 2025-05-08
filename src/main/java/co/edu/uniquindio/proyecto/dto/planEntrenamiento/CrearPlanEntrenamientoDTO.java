@@ -5,7 +5,6 @@ public record CrearPlanEntrenamientoDTO(
         int duracion,
         String dificultad,
         String descripcion,
-        String codEntrenador,
         Long codTipoEntrenamiento
 
 ) {

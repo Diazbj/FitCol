@@ -30,7 +30,7 @@ public class PlanEntrenamiento {
     private Entrenador entrenador;
 
     @ManyToOne
-    @JoinColumn(name = "TipoEntrenamiento_codTipo")
+    @JoinColumn(name = "TipoEntrenamiento_id")
     private TipoEntrenamiento tipoEntrenamiento;
 
     @OneToMany(mappedBy = "planEntrenamiento")

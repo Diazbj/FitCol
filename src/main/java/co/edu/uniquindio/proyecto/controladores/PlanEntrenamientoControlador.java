@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDT
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.servicios.PlanEntrenamientoServicio;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +21,14 @@ public class PlanEntrenamientoControlador {
 
     private final PlanEntrenamientoServicio planEntrenamientoServicio;
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping
     @Operation(summary = "Crear Plan de Entrenamiento")
     public ResponseEntity<MensajeDTO<String>> crear(@Valid @RequestBody CrearPlanEntrenamientoDTO dto) throws Exception {
         planEntrenamientoServicio.crearPlanEntrenamiento(dto);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Plan creado correctamente"));
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{id}")
     @Operation(summary = "Editar Plan de Entrenamiento")
     public ResponseEntity<MensajeDTO<String>> editar(@PathVariable Long id, @Valid @RequestBody CrearPlanEntrenamientoDTO dto) throws Exception {
@@ -47,6 +49,7 @@ public class PlanEntrenamientoControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, planEntrenamientoServicio.listarPlanesEntrenamiento()));
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Plan de Entrenamiento")
     public ResponseEntity<MensajeDTO<String>> eliminar(@PathVariable Long id) throws Exception {

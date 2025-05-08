@@ -107,17 +107,6 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
         entrenadorRepo.save(entrenador);
     }
 
-    @Override
-    public void crearPlanEntrenamiento(CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, String id) {
-        Entrenador entrenador = entrenadorRepo.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Entrenador no encontrado"));
-
-        PlanEntrenamiento plan = planEntrenamientoMapper.fromDTO(crearPlanEntrenamientoDTO);
-
-        plan.setEntrenador(entrenador);
-
-        planEntrenamientoRepo.save(plan);
-    }
 
     @Override
     public void subirCertificado(CertificacionDTO certificacionDTO, String id) throws Exception {

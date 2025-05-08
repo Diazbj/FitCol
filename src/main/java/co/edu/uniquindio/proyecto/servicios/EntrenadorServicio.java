@@ -5,7 +5,6 @@ import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDT
 
 public interface EntrenadorServicio {
 
-    void crearPlanEntrenamiento(CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, String id) throws Exception;
     void crearEntrenador(CrearEntrenadorDTO crearEntrenadorDTO) throws Exception;
     EntrenadorDTO obtenerEntrenador() throws Exception;
     void eliminarEntrenador() throws Exception;

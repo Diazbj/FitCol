@@ -24,12 +24,14 @@ public class PlanEntrenamientoServicioImpl implements PlanEntrenamientoServicio 
     private final EntrenadorRepo entrenadorRepo;
     private final TipoEntrenamientoRepo tipoEntrenamientoRepo;
     private final PlanEntrenamientoMapper mapper;
+    private final ClienteServicioImpl clienteServicioImpl;
 
     @Override
     public void crearPlanEntrenamiento(CrearPlanEntrenamientoDTO dto) throws Exception {
         PlanEntrenamiento plan = mapper.fromDTO(dto);
+        String id=clienteServicioImpl.obtenerIdSesion();
 
-        Entrenador entrenador = entrenadorRepo.findById(dto.codEntrenador())
+        Entrenador entrenador = entrenadorRepo.findById(id)
                 .orElseThrow(() -> new Exception("Entrenador no encontrado"));
 
         TipoEntrenamiento tipo = tipoEntrenamientoRepo.findById(dto.codTipoEntrenamiento())
@@ -43,6 +45,7 @@ public class PlanEntrenamientoServicioImpl implements PlanEntrenamientoServicio 
 
     @Override
     public void editarPlanEntrenamiento(Long id, CrearPlanEntrenamientoDTO dto) throws Exception {
+
         PlanEntrenamiento plan = planRepo.findById(id)
                 .orElseThrow(() -> new Exception("Plan no encontrado"));
 
@@ -51,7 +54,9 @@ public class PlanEntrenamientoServicioImpl implements PlanEntrenamientoServicio 
         plan.setDificultad(dto.dificultad());
         plan.setDescripcion(dto.descripcion());
 
-        Entrenador entrenador = entrenadorRepo.findById(dto.codEntrenador())
+        String usuarioId=clienteServicioImpl.obtenerIdSesion();
+
+        Entrenador entrenador = entrenadorRepo.findById(usuarioId)
                 .orElseThrow(() -> new Exception("Entrenador no encontrado"));
         TipoEntrenamiento tipo = tipoEntrenamientoRepo.findById(dto.codTipoEntrenamiento())
                 .orElseThrow(() -> new Exception("Tipo de entrenamiento no encontrado"));

@@ -1,4 +1,4 @@
 package co.edu.uniquindio.proyecto.dto.planEntrenamiento;
 
-public record TipoEntrenamientoDTO(String nombre) {
+public record TipoEntrenamientoDTO(Long id,String nombre) {
 }

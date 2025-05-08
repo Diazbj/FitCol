@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearTipoEntrenamientoDT
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.TipoEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.servicios.TipoEntrenamientoServicio;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tipo-entrenamiento")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class TipoEntrenamientoControlador {
 
     private final TipoEntrenamientoServicio servicio;

@@ -12,6 +12,5 @@ public record EditarEntrenadorDTO(
         Integer aniosExp,
         List<String> telefonos
 
-
 ) {
 }

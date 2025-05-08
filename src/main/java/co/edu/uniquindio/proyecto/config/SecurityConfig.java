@@ -46,6 +46,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/nutricionistas").permitAll()
                         .requestMatchers("/api/clientes/**").hasAuthority("ROLE_CLIENTE")
                         .requestMatchers("/api/entrenadores/**").hasAuthority("ROLE_ENTRENADOR")
+                        .requestMatchers("/api/planEntrenamiento/**").hasAuthority("ROLE_ENTRENADOR")
+                        .requestMatchers("/api/tipo-entrenamiento/**").hasAuthority("ROLE_ENTRENADOR")
                         .requestMatchers("/api/nutricionistas").hasAuthority("ROLE_NUTRICIONISTA")
                         .requestMatchers("/api/nutricionistas/**").hasAuthority("ROLE_NUTRICIONISTA")
                         .anyRequest().authenticated()
