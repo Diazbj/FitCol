@@ -77,7 +77,8 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public void eliminarCliente(String id)throws Exception{
+    public void eliminarCliente()throws Exception{
+        String id = obtenerIdSesion();
         Cliente cliente = clienteRepo.findById(id)
                 .orElseThrow(() -> new Exception("El cliente con ID " + id + " no existe"));
         clienteRepo.deleteById(id);

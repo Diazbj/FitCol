@@ -11,6 +11,7 @@ public record NutricionistaDTO(
         String segundoNombre,
         String primerApellido,
         String segundoApellido,
+        Integer aniosExp,
         @Email String email,
         List<String> telefonos
 

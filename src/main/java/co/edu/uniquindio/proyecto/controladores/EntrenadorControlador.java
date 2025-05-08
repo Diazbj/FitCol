@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.entrenador.*;
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,21 +26,21 @@ public class EntrenadorControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
     }
 
-
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping()
     @Operation(summary="Consultar Entrenador")
     public ResponseEntity<MensajeDTO<EntrenadorDTO>> obtenerEntrenador()throws Exception{
         EntrenadorDTO info=entrenadorServicio.obtenerEntrenador();
         return ResponseEntity.ok(new MensajeDTO<>(true, info));
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping()
     @Operation(summary = "Eliminar Entrenador")
     public ResponseEntity<MensajeDTO<String>> eliminarEntrenador()throws Exception{
         entrenadorServicio.eliminarEntrenador();
         return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador eliminado"));
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping()
     @Operation(summary = "Editar Entrenador")
     public ResponseEntity<MensajeDTO<String>> editarEntrenador(@Valid @RequestBody EditarEntrenadorDTO editarEntrenador)throws Exception {

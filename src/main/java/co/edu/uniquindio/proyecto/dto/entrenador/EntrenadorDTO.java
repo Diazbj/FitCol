@@ -10,6 +10,7 @@ public record EntrenadorDTO(
         String segundoNombre,
         String primerApellido,
         String segundoApellido,
+        Integer aniosExp,
         @Email String email,
         List<String> telefonos
 ) {

@@ -33,14 +33,14 @@ public class ClienteControlador {
         ClienteDTO info=clienteServicio.obtenerCliente();
         return ResponseEntity.ok(new MensajeDTO<>(true, info));
     }
-
-    @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    @DeleteMapping()
     @Operation(summary = "Eliminar Cliente")
-    public ResponseEntity<MensajeDTO<String>> eliminarCliente(@PathVariable String id)throws Exception{
-        clienteServicio.eliminarCliente(id);
+    public ResponseEntity<MensajeDTO<String>> eliminarCliente()throws Exception{
+        clienteServicio.eliminarCliente();
         return ResponseEntity.ok(new MensajeDTO<>(true, "Cliente eliminado"));
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping
     @Operation(summary = "Editar Cliente")
     public ResponseEntity<MensajeDTO<String>> editarCliente(@Valid @RequestBody EditarClienteDTO editarCliente)throws Exception {

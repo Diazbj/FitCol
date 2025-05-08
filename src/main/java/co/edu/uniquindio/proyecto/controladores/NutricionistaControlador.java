@@ -8,6 +8,7 @@ import co.edu.uniquindio.proyecto.dto.nutricionista.EditarNutricionistaDTO;
 import co.edu.uniquindio.proyecto.dto.nutricionista.NutricionistaDTO;
 import co.edu.uniquindio.proyecto.servicios.NutricionistaServicio;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,28 +25,30 @@ public class NutricionistaControlador {
     private final NutricionistaServicio nutricionistaServicio;
 
     @PostMapping
-    @Operation(summary="Crear Nutricionista")
-    public ResponseEntity<MensajeDTO<String>> crearNutricionista(@Valid @RequestBody CrearNutricionistaDTO crearNutricionista)throws Exception{
+    @Operation(summary = "Crear Nutricionista")
+    public ResponseEntity<MensajeDTO<String>> crearNutricionista(@Valid @RequestBody CrearNutricionistaDTO crearNutricionista) throws Exception {
         nutricionistaServicio.crearNutricionista(crearNutricionista);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
     }
 
-
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping()
-    @Operation(summary="Consultar Nutricionista")
-    public ResponseEntity<MensajeDTO<NutricionistaDTO>> obtenerNutricionista()throws Exception{
-        NutricionistaDTO info=nutricionistaServicio.obtenerNutricionista();
+    @Operation(summary = "Consultar Nutricionista")
+    public ResponseEntity<MensajeDTO<NutricionistaDTO>> obtenerNutricionista() throws Exception {
+        NutricionistaDTO info = nutricionistaServicio.obtenerNutricionista();
         return ResponseEntity.ok(new MensajeDTO<>(false, info));
     }
 
-    @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    @DeleteMapping()
     @Operation(summary = "Eliminar Nutricionista")
-    public ResponseEntity<MensajeDTO<String>> eliminarNutricionista()throws Exception{
+    public ResponseEntity<MensajeDTO<String>> eliminarNutricionista() throws Exception {
         nutricionistaServicio.eliminarNutricionista();
         return ResponseEntity.ok(new MensajeDTO<>(false, "Nutricionista eliminado"));
     }
 
-    @PutMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    @PutMapping()
     @Operation(summary = "Editar Nutricionista")
     public ResponseEntity<MensajeDTO<String>> editarNutricionista( @Valid @RequestBody EditarNutricionistaDTO editarNutricionista)throws Exception {
         nutricionistaServicio.editarNutricionista(editarNutricionista);
