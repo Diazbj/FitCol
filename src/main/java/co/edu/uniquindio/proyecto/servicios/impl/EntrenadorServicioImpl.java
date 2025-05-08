@@ -30,6 +30,7 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
     private final CertificadoMapper certificadoMapper;
     private final EntrenadorCertificacionRepo entrenadorCertificacionRepo;
     private final PasswordEncoder passwordEncoder;
+    private final ClienteServicioImpl clienteServicioImpl;
 
 
     @Override
@@ -57,7 +58,9 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
     }
 
     @Override
-    public EntrenadorDTO obtenerEntrenador(String id)throws Exception{
+    public EntrenadorDTO obtenerEntrenador()throws Exception{
+
+        String id = clienteServicioImpl.obtenerIdSesion();
         // Buscar el entrenador por ID
         Entrenador entrenador = entrenadorRepo.findById(id)
                 .orElseThrow(() -> new Exception("El entrenador con ID " + id + " no existe"));
@@ -67,13 +70,19 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
     }
 
     @Override
-    public void eliminarEntrenador(String id)throws Exception{
+    public void eliminarEntrenador()throws Exception{
+
+        String id = clienteServicioImpl.obtenerIdSesion();
+
         Entrenador entrenador = entrenadorRepo.findById(id)
                 .orElseThrow(() -> new Exception("El entrenador con ID " + id + " no existe"));
         entrenadorRepo.deleteById(id);
     }
     @Override
-    public void editarEntrenador(String id, EditarEntrenadorDTO editarEntrenadorDTO)throws Exception{
+    public void editarEntrenador(EditarEntrenadorDTO editarEntrenadorDTO)throws Exception{
+
+        String id = clienteServicioImpl.obtenerIdSesion();
+
         // Buscar el entrenador por ID
         Entrenador entrenador = entrenadorRepo.findById(id)
                 .orElseThrow(() -> new Exception("El entrenador con ID " + id + " no existe"));

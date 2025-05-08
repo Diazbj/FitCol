@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import java.util.List;
 
 public record EntrenadorDTO(
-
+        String usuarioId,
         String primerNombre,
         String segundoNombre,
         String primerApellido,

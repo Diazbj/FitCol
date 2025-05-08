@@ -26,24 +26,24 @@ public class EntrenadorControlador {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping()
     @Operation(summary="Consultar Entrenador")
-    public ResponseEntity<MensajeDTO<EntrenadorDTO>> obtenerEntrenador(@PathVariable String id)throws Exception{
-        EntrenadorDTO info=entrenadorServicio.obtenerEntrenador(id);
+    public ResponseEntity<MensajeDTO<EntrenadorDTO>> obtenerEntrenador()throws Exception{
+        EntrenadorDTO info=entrenadorServicio.obtenerEntrenador();
         return ResponseEntity.ok(new MensajeDTO<>(true, info));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping()
     @Operation(summary = "Eliminar Entrenador")
-    public ResponseEntity<MensajeDTO<String>> eliminarEntrenador(@PathVariable String id)throws Exception{
-        entrenadorServicio.eliminarEntrenador(id);
+    public ResponseEntity<MensajeDTO<String>> eliminarEntrenador()throws Exception{
+        entrenadorServicio.eliminarEntrenador();
         return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador eliminado"));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping()
     @Operation(summary = "Editar Entrenador")
-    public ResponseEntity<MensajeDTO<String>> editarEntrenador(@PathVariable String id, @Valid @RequestBody EditarEntrenadorDTO editarEntrenador)throws Exception {
-        entrenadorServicio.editarEntrenador(id,editarEntrenador);
+    public ResponseEntity<MensajeDTO<String>> editarEntrenador(@Valid @RequestBody EditarEntrenadorDTO editarEntrenador)throws Exception {
+        entrenadorServicio.editarEntrenador(editarEntrenador);
         return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador editado"));
     }
 

@@ -7,8 +7,8 @@ public interface EntrenadorServicio {
 
     void crearPlanEntrenamiento(CrearPlanEntrenamientoDTO crearPlanEntrenamientoDTO, String id) throws Exception;
     void crearEntrenador(CrearEntrenadorDTO crearEntrenadorDTO) throws Exception;
-    EntrenadorDTO obtenerEntrenador(String id) throws Exception;
-    void eliminarEntrenador(String id) throws Exception;
-    void editarEntrenador(String id, EditarEntrenadorDTO editarEntrenadorDTO) throws Exception;
+    EntrenadorDTO obtenerEntrenador() throws Exception;
+    void eliminarEntrenador() throws Exception;
+    void editarEntrenador( EditarEntrenadorDTO editarEntrenadorDTO) throws Exception;
     void subirCertificado(CertificacionDTO certificacionDTO,String id) throws Exception;
 }

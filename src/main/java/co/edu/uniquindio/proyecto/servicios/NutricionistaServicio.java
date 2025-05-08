@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface NutricionistaServicio {
     void crearNutricionista(CrearNutricionistaDTO crearNutricionistaDTO) throws Exception;
-    NutricionistaDTO obtenerNutricionista(String id) throws Exception;
-    void eliminarNutricionista(String id) throws Exception;
-    void editarNutricionista(String id, EditarNutricionistaDTO editarNutricionistaDTO) throws Exception;
+    NutricionistaDTO obtenerNutricionista() throws Exception;
+    void eliminarNutricionista() throws Exception;
+    void editarNutricionista( EditarNutricionistaDTO editarNutricionistaDTO) throws Exception;
     void subirTitulo(TituloDTO tituloDTO, String id) throws Exception;
     void editarTitulo(TituloDTO tituloDTO, String id) throws Exception;
     void eliminarTitulo(String id) throws Exception;

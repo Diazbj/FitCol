@@ -35,7 +35,9 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
     private final TituloMapper tituloMapper;
     private final NutricionistaTituloRepo nutricionistaTituloRepo;
     private final CiudadRepo ciudadRepo;
+    private final ClienteServicioImpl clienteServicioImpl;
     private final PasswordEncoder passwordEncoder;
+
 
     @Override
     public void crearNutricionista(CrearNutricionistaDTO crearNutricionistaDTO)throws Exception{
@@ -43,7 +45,10 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
         if (nutricionistaRepo.existsById(crearNutricionistaDTO.usuarioId())) {
             throw new IllegalArgumentException("Ya existe un nutricionista con el ID: " + crearNutricionistaDTO.usuarioId());
         }
+
+
         Nutricionista nutricionista = nutricionistaMapper.fromCrearDTOToEntity(crearNutricionistaDTO);
+
 
         List<UsuarioTelefono> telefonos = crearNutricionistaDTO.telefonos().stream()
                 .map(numero -> {
@@ -60,7 +65,10 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
     }
 
     @Override
-    public NutricionistaDTO obtenerNutricionista(String id)throws Exception{
+    public NutricionistaDTO obtenerNutricionista()throws Exception{
+
+        String id = clienteServicioImpl.obtenerIdSesion();
+
         // Buscar el nutricionista por ID
         Nutricionista nutricionista = nutricionistaRepo.findById(id)
                 .orElseThrow(() -> new Exception("El nutricionista con ID " + id + " no existe"));
@@ -70,13 +78,19 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
     }
 
     @Override
-    public void eliminarNutricionista(String id)throws Exception{
+    public void eliminarNutricionista()throws Exception{
+
+        String id = clienteServicioImpl.obtenerIdSesion();
+
         Nutricionista nutricionista = nutricionistaRepo.findById(id)
                 .orElseThrow(() -> new Exception("El nutricionista con ID " + id + " no existe"));
         nutricionistaRepo.deleteById(id);
     }
     @Override
-    public void editarNutricionista(String id, EditarNutricionistaDTO editarNutricionistaDTO)throws Exception{
+    public void editarNutricionista( EditarNutricionistaDTO editarNutricionistaDTO)throws Exception{
+
+        String id = clienteServicioImpl.obtenerIdSesion();
+
         // Buscar el nutricionista por ID
         Nutricionista nutricionista = nutricionistaRepo.findById(id)
                 .orElseThrow(() -> new Exception("El nutricionista con ID " + id + " no existe"));

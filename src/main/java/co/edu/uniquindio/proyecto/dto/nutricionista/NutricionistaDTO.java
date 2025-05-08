@@ -6,6 +6,7 @@ import java.util.List;
 
 public record NutricionistaDTO(
 
+        String usuarioId,
         String primerNombre,
         String segundoNombre,
         String primerApellido,
