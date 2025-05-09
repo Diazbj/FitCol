@@ -10,5 +10,11 @@ import org.mapstruct.Mapping;
 public interface PlanEntrenamientoMapper {
 
     PlanEntrenamiento fromDTO(CrearPlanEntrenamientoDTO dto);
+
+
+    @Mapping(target = "codPlanEntrenamiento", source = "codPlanEntrenamiento") // 👈 importante
+    @Mapping(target = "tipoEntrenamientoNombre", source = "tipoEntrenamiento.nombre")
+    @Mapping(target = "tipoEntrenamientoId", source = "tipoEntrenamiento.id")
+    @Mapping(target = "usuarioId", source = "entrenador.usuarioId")
     PlanEntrenamientoDTO toDTO(PlanEntrenamiento plan);
 }

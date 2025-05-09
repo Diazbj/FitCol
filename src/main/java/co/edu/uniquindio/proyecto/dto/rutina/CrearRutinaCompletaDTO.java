@@ -4,10 +4,9 @@ import co.edu.uniquindio.proyecto.dto.ejercicio.EjercicioRutinaDTO;
 
 import java.util.List;
 
-public record CrearRutinaDTO(
+public record CrearRutinaCompletaDTO(
         String nombre,
         Long codPlanEntrenamiento,
         List<EjercicioRutinaDTO> ejercicios
-
 ) {
 }

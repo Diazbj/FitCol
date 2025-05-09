@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.ejercicio.CrearEjercicioDTO;
 import co.edu.uniquindio.proyecto.dto.ejercicio.EjercicioDTO;
 import co.edu.uniquindio.proyecto.servicios.EjercicioServicio;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
     @RestController
     @RequiredArgsConstructor
     @RequestMapping("/api/ejercicio")
+    @SecurityRequirement(name = "bearerAuth")
     public class EjercicioControlador {
 
         private final EjercicioServicio ejercicioServicio;

@@ -28,7 +28,7 @@ public class PlanEntrenamientoServicioImpl implements PlanEntrenamientoServicio 
 
     @Override
     public void crearPlanEntrenamiento(CrearPlanEntrenamientoDTO dto) throws Exception {
-        PlanEntrenamiento plan = mapper.fromDTO(dto);
+
         String id=clienteServicioImpl.obtenerIdSesion();
 
         Entrenador entrenador = entrenadorRepo.findById(id)
@@ -36,6 +36,8 @@ public class PlanEntrenamientoServicioImpl implements PlanEntrenamientoServicio 
 
         TipoEntrenamiento tipo = tipoEntrenamientoRepo.findById(dto.codTipoEntrenamiento())
                 .orElseThrow(() -> new Exception("Tipo de entrenamiento no encontrado"));
+
+        PlanEntrenamiento plan = mapper.fromDTO(dto);
 
         plan.setEntrenador(entrenador);
         plan.setTipoEntrenamiento(tipo);

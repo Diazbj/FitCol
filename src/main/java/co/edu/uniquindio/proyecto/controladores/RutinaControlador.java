@@ -2,10 +2,11 @@ package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.AsignarRutinasDTO;
+import co.edu.uniquindio.proyecto.dto.rutina.CrearRutinaCompletaDTO;
 import co.edu.uniquindio.proyecto.dto.rutina.CrearRutinaDTO;
-import co.edu.uniquindio.proyecto.dto.rutina.RutinaDTO;
 import co.edu.uniquindio.proyecto.servicios.RutinaServicio;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/rutinas")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class RutinaControlador {
 
     private final RutinaServicio rutinaServicio;
 
     @PostMapping
     @Operation(summary = "Crear Rutina")
-    public ResponseEntity<MensajeDTO<String>> crearRutina(@Valid @RequestBody CrearRutinaDTO dto) throws Exception {
+    public ResponseEntity<MensajeDTO<String>> crearRutina(@Valid @RequestBody CrearRutinaCompletaDTO dto) throws Exception {
         rutinaServicio.crearRutina(dto);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Rutina creada exitosamente"));
     }
@@ -36,15 +38,15 @@ public class RutinaControlador {
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener una Rutina por ID")
-    public ResponseEntity<MensajeDTO<RutinaDTO>> obtenerRutina(@PathVariable Long id) throws Exception {
-        RutinaDTO rutina = rutinaServicio.obtenerRutina(id);
+    public ResponseEntity<MensajeDTO<CrearRutinaCompletaDTO>> obtenerRutina(@PathVariable Long id) throws Exception {
+        CrearRutinaCompletaDTO rutina = rutinaServicio.obtenerRutina(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, rutina));
     }
 
     @GetMapping("/entrenador/{id}")
     @Operation(summary = "Listar todas las Rutinas")
-    public ResponseEntity<MensajeDTO<List<RutinaDTO>>> listarRutinas(@PathVariable Long id) throws Exception{
-        List<RutinaDTO> lista = rutinaServicio.listarRutinas(id);
+    public ResponseEntity<MensajeDTO<List<CrearRutinaCompletaDTO>>> listarRutinas(@PathVariable Long id) throws Exception{
+        List<CrearRutinaCompletaDTO> lista = rutinaServicio.listarRutinas(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, lista));
     }
 

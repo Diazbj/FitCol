@@ -48,11 +48,11 @@ public class EntrenadorControlador {
         return ResponseEntity.ok(new MensajeDTO<>(true, "Entrenador editado"));
     }
 
-
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/certificados/{id}")
     @Operation(summary="Subir Certificados")
-    public ResponseEntity<MensajeDTO<String>> subirCertificado(@Valid @RequestBody CertificacionDTO certificacionDTO, @PathVariable String id)throws Exception{
-        entrenadorServicio.subirCertificado(certificacionDTO,id);
+    public ResponseEntity<MensajeDTO<String>> subirCertificado(@Valid @RequestBody CertificacionDTO certificacionDTO)throws Exception{
+        entrenadorServicio.subirCertificado(certificacionDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su certificado se ha registrado con exito"));
     }
 

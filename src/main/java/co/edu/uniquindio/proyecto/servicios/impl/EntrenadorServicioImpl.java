@@ -109,7 +109,9 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
 
 
     @Override
-    public void subirCertificado(CertificacionDTO certificacionDTO, String id) throws Exception {
+    public void subirCertificado(CertificacionDTO certificacionDTO) throws Exception {
+
+        String id= clienteServicioImpl.obtenerIdSesion();
         // 1. Buscar el entrenador por ID
         Entrenador entrenador = entrenadorRepo.findById(id)
                 .orElseThrow(() -> new Exception("El entrenador con ID " + id + " no existe"));

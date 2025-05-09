@@ -1,15 +1,12 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
+import co.edu.uniquindio.proyecto.dto.ejercicio.EjercicioRutinaDTO;
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.AsignarRutinasDTO;
+import co.edu.uniquindio.proyecto.dto.rutina.CrearRutinaCompletaDTO;
 import co.edu.uniquindio.proyecto.dto.rutina.CrearRutinaDTO;
-import co.edu.uniquindio.proyecto.dto.rutina.RutinaDTO;
 import co.edu.uniquindio.proyecto.mapper.RutinaMapper;
-import co.edu.uniquindio.proyecto.modelo.entrenador.PlanEntrenamiento;
-import co.edu.uniquindio.proyecto.modelo.entrenador.Rutina;
-import co.edu.uniquindio.proyecto.modelo.entrenador.RutinaPlanEnt;
-import co.edu.uniquindio.proyecto.repositorio.PlanEntrenamientoRepo;
-import co.edu.uniquindio.proyecto.repositorio.RutinaPlanEntRepo;
-import co.edu.uniquindio.proyecto.repositorio.RutinaRepo;
+import co.edu.uniquindio.proyecto.modelo.entrenador.*;
+import co.edu.uniquindio.proyecto.repositorio.*;
 import co.edu.uniquindio.proyecto.servicios.RutinaServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,12 +21,40 @@ public class RutinaServicioImpl implements RutinaServicio {
     private final RutinaMapper rutinaMapper;
     private final PlanEntrenamientoRepo planEntrenamientoRepo;
     private final RutinaPlanEntRepo rutinaPlanEntRepo;
+    private final EjercicioRutinaRepo ejercicioRutinaRepo;
+    private final EjercicioRepo ejercicioRepo;
 
     @Override
-    public void crearRutina(CrearRutinaDTO dto) {
+    public void crearRutina(CrearRutinaCompletaDTO dto) {
+        // Obtener el plan utilizando el mapper
+        PlanEntrenamiento plan = planEntrenamientoRepo.findById(dto.codPlanEntrenamiento())
+                .orElseThrow(() -> new RuntimeException("Plan no encontrado"));
+
+        // Crear y guardar la rutina usando el RutinaMapper
         Rutina rutina = rutinaMapper.fromCrearDTO(dto);
         rutinaRepo.save(rutina);
+
+        // Asociar rutina con el plan
+        RutinaPlanEnt relacion = new RutinaPlanEnt();
+        relacion.setPlanEntrenamiento(plan);
+        relacion.setRutina(rutina);
+        rutinaPlanEntRepo.save(relacion);
+
+        // Asociar ejercicios con la rutina usando EjercicioRutinaMapper
+        for (EjercicioRutinaDTO ej : dto.ejercicios()) {
+            Ejercicio ejercicio = ejercicioRepo.findById(ej.idEjercicio())
+                    .orElseThrow(() -> new RuntimeException("Ejercicio no encontrado"));
+
+            EjercicioRutina relacionEj = new EjercicioRutina();
+            relacionEj.setRutina(rutina);
+            relacionEj.setEjercicio(ejercicio);
+            relacionEj.setNumeroSeries(ej.numeroSeries());
+            relacionEj.setNumeroRepeticiones(ej.numeroRepeticiones());
+
+            ejercicioRutinaRepo.save(relacionEj);
+        }
     }
+
 
     @Override
     public void editarRutina(Long id, CrearRutinaDTO dto) throws Exception {
@@ -42,14 +67,14 @@ public class RutinaServicioImpl implements RutinaServicio {
     }
 
     @Override
-    public RutinaDTO obtenerRutina(Long id) throws Exception {
+    public CrearRutinaCompletaDTO obtenerRutina(Long id) throws Exception {
         Rutina rutina = rutinaRepo.findById(id)
                 .orElseThrow(() -> new Exception("Rutina con ID " + id + " no encontrada"));
         return rutinaMapper.toDTO(rutina);
     }
 
     @Override
-    public List<RutinaDTO> listarRutinas(Long codigoEntrenador) {
+    public List<CrearRutinaCompletaDTO> listarRutinas(Long codigoEntrenador) {
         return rutinaRepo.obtenerRutinasPorEntrenador(codigoEntrenador).stream()
                 .map(rutinaMapper::toDTO)
                 .toList();

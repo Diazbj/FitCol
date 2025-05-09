@@ -38,13 +38,16 @@ public class PlanEntrenamientoControlador {
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener Plan por ID")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<MensajeDTO<PlanEntrenamientoDTO>> obtener(@PathVariable Long id) throws Exception {
         PlanEntrenamientoDTO planEntrenamiento = planEntrenamientoServicio.obtenerPlanEntrenamiento(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, planEntrenamiento));
     }
 
+
     @GetMapping
     @Operation(summary = "Listar todos los planes")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<MensajeDTO<List<PlanEntrenamientoDTO>>> listar() {
         return ResponseEntity.ok(new MensajeDTO<>(false, planEntrenamientoServicio.listarPlanesEntrenamiento()));
     }

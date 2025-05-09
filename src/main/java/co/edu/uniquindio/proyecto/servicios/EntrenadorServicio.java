@@ -9,5 +9,5 @@ public interface EntrenadorServicio {
     EntrenadorDTO obtenerEntrenador() throws Exception;
     void eliminarEntrenador() throws Exception;
     void editarEntrenador( EditarEntrenadorDTO editarEntrenadorDTO) throws Exception;
-    void subirCertificado(CertificacionDTO certificacionDTO,String id) throws Exception;
+    void subirCertificado(CertificacionDTO certificacionDTO) throws Exception;
 }

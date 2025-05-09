@@ -26,7 +26,7 @@ public class PlanEntrenamiento {
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "Entrenador_Usuario_codigo")
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Entrenador entrenador;
 
     @ManyToOne
