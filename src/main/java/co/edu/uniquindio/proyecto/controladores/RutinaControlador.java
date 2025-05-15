@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.AsignarRutinasDTO;
 import co.edu.uniquindio.proyecto.dto.rutina.CrearRutinaCompletaDTO;
 import co.edu.uniquindio.proyecto.dto.rutina.CrearRutinaDTO;
+import co.edu.uniquindio.proyecto.dto.rutina.RutinaCompletaDTO;
 import co.edu.uniquindio.proyecto.servicios.RutinaServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -43,10 +44,10 @@ public class RutinaControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, rutina));
     }
 
-    @GetMapping("/entrenador/{id}")
+    @GetMapping("/entrenador")
     @Operation(summary = "Listar todas las Rutinas")
-    public ResponseEntity<MensajeDTO<List<CrearRutinaCompletaDTO>>> listarRutinas(@PathVariable Long id) throws Exception{
-        List<CrearRutinaCompletaDTO> lista = rutinaServicio.listarRutinas(id);
+    public ResponseEntity<MensajeDTO<List<RutinaCompletaDTO>>> listarRutinas() throws Exception{
+        List<RutinaCompletaDTO> lista = rutinaServicio.listarRutinas();
         return ResponseEntity.ok(new MensajeDTO<>(false, lista));
     }
 

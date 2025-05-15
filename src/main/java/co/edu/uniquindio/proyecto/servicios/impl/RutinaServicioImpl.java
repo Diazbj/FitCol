@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.ejercicio.EjercicioRutinaDTO;
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.AsignarRutinasDTO;
 import co.edu.uniquindio.proyecto.dto.rutina.CrearRutinaCompletaDTO;
 import co.edu.uniquindio.proyecto.dto.rutina.CrearRutinaDTO;
+import co.edu.uniquindio.proyecto.dto.rutina.RutinaCompletaDTO;
 import co.edu.uniquindio.proyecto.mapper.RutinaMapper;
 import co.edu.uniquindio.proyecto.modelo.entrenador.*;
 import co.edu.uniquindio.proyecto.repositorio.*;
@@ -23,6 +24,7 @@ public class RutinaServicioImpl implements RutinaServicio {
     private final RutinaPlanEntRepo rutinaPlanEntRepo;
     private final EjercicioRutinaRepo ejercicioRutinaRepo;
     private final EjercicioRepo ejercicioRepo;
+    private final ClienteServicioImpl clienteServicioImpl;
 
     @Override
     public void crearRutina(CrearRutinaCompletaDTO dto) {
@@ -74,9 +76,10 @@ public class RutinaServicioImpl implements RutinaServicio {
     }
 
     @Override
-    public List<CrearRutinaCompletaDTO> listarRutinas(Long codigoEntrenador) {
-        return rutinaRepo.obtenerRutinasPorEntrenador(codigoEntrenador).stream()
-                .map(rutinaMapper::toDTO)
+    public List<RutinaCompletaDTO> listarRutinas() {
+        String id = clienteServicioImpl.obtenerIdSesion();
+        return rutinaRepo.obtenerRutinasPorEntrenador(id).stream()
+                .map(rutinaMapper::toCompletaDTO)
                 .toList();
     }
 

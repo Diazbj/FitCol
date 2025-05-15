@@ -19,7 +19,7 @@ public class Rutina {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "rutina")
+    @OneToMany(mappedBy = "rutina", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<RutinaPlanEnt> rutinaPlanEnts;
 
     @OneToMany(mappedBy = "rutina")
