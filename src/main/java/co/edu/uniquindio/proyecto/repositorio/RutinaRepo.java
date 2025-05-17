@@ -10,6 +10,14 @@ import java.util.List;
 
 public interface RutinaRepo extends JpaRepository<Rutina, Long> {
 
+    @Query("""
+    SELECT DISTINCT r FROM Rutina r
+    LEFT JOIN FETCH r.ejercicios er
+    LEFT JOIN FETCH er.ejercicio
+    WHERE r.codRutina = :id
+""")
+    Rutina obtenerRutinaConEjercicios(@Param("id") Long id);
+
     @Query("SELECT DISTINCT r FROM Rutina r JOIN r.rutinaPlanEnts rpe JOIN rpe.planEntrenamiento pe WHERE pe.entrenador.usuarioId = :codigoEntrenador")
     List<Rutina> obtenerRutinasPorEntrenador(@Param("codigoEntrenador") String codigoEntrenador);
 

@@ -44,7 +44,7 @@ public class RutinaServicioImpl implements RutinaServicio {
 
         // Asociar ejercicios con la rutina usando EjercicioRutinaMapper
         for (EjercicioRutinaDTO ej : dto.ejercicios()) {
-            Ejercicio ejercicio = ejercicioRepo.findById(ej.idEjercicio())
+            Ejercicio ejercicio = ejercicioRepo.findById(ej.codEjercicio())
                     .orElseThrow(() -> new RuntimeException("Ejercicio no encontrado"));
 
             EjercicioRutina relacionEj = new EjercicioRutina();
@@ -70,8 +70,12 @@ public class RutinaServicioImpl implements RutinaServicio {
 
     @Override
     public CrearRutinaCompletaDTO obtenerRutina(Long id) throws Exception {
-        Rutina rutina = rutinaRepo.findById(id)
-                .orElseThrow(() -> new Exception("Rutina con ID " + id + " no encontrada"));
+        Rutina rutina = rutinaRepo.obtenerRutinaConEjercicios(id);
+
+        if (rutina == null) {
+            throw new Exception("Rutina con ID " + id + " no encontrada");
+        }
+
         return rutinaMapper.toDTO(rutina);
     }
 

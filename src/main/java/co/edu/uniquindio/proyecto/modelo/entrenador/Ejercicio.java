@@ -22,6 +22,6 @@ public class Ejercicio {
     @Lob
     private String descripcion;
 
-    @OneToMany(mappedBy = "ejercicio")
+    @OneToMany(mappedBy = "ejercicio",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<EjercicioRutina> ejerciciosRutina;
 }

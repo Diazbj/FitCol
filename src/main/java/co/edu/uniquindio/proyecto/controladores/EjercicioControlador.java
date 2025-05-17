@@ -4,6 +4,7 @@ package co.edu.uniquindio.proyecto.controladores;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.ejercicio.CrearEjercicioDTO;
 import co.edu.uniquindio.proyecto.dto.ejercicio.EjercicioDTO;
+import co.edu.uniquindio.proyecto.dto.ejercicio.EjercicioRutinaDTO;
 import co.edu.uniquindio.proyecto.servicios.EjercicioServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -28,6 +29,26 @@ import java.util.List;
             ejercicioServicio.crearEjercicio(dto);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Ejercicio creado exitosamente"));
         }
+
+        @PostMapping("/asignarEjercicio")
+        @Operation(summary = "Asignar Ejercicio a Rutina")
+        public ResponseEntity<MensajeDTO<EjercicioRutinaDTO>> asignarEjercicio(@Valid @RequestBody EjercicioRutinaDTO dto) throws Exception {
+            EjercicioRutinaDTO resultado = ejercicioServicio.asignarEjercicioRutina(dto);
+            return ResponseEntity.ok(new MensajeDTO<>(false, resultado));
+        }
+
+        @DeleteMapping("/eliminarAsignacion")
+        public ResponseEntity<MensajeDTO<String>> eliminarAsignacion(
+                @RequestParam Long idEjercicio,
+                @RequestParam Long idRutina) {
+            try {
+                ejercicioServicio.eliminarAsignacionEjercicioRutina(idEjercicio, idRutina);
+                return ResponseEntity.ok(new MensajeDTO<>(false, "Asignación eliminada correctamente"));
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(new MensajeDTO<>(true, e.getMessage()));
+            }
+        }
+
 
         @PutMapping("/{id}")
         @Operation(summary = "Editar Ejercicio")

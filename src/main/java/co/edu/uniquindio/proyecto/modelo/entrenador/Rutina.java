@@ -22,6 +22,6 @@ public class Rutina {
     @OneToMany(mappedBy = "rutina", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<RutinaPlanEnt> rutinaPlanEnts;
 
-    @OneToMany(mappedBy = "rutina")
+    @OneToMany(mappedBy = "rutina",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<EjercicioRutina> ejercicios;
 }

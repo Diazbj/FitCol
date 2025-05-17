@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface EjercicioRutinaMapper {
 
-    @Mapping(source = "ejercicio.codEjercicio", target = "idEjercicio") // Accedemos a codEjercicio de la entidad Ejercicio
+    @Mapping(source = "ejercicio.codEjercicio", target = "codEjercicio") // Accedemos a codEjercicio de la entidad Ejercicio
+    @Mapping(source = "ejercicio.nombre", target = "nombreEjercicio")
     EjercicioRutinaDTO toDTO(EjercicioRutina ejercicioRutina);
 }

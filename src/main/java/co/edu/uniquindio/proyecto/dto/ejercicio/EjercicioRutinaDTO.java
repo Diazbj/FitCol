@@ -1,9 +1,10 @@
 package co.edu.uniquindio.proyecto.dto.ejercicio;
 
 public record EjercicioRutinaDTO(
-        Long idEjercicio,
+        Long codRutina,        // <- nuevo campo
+        Long codEjercicio,
         Integer numeroSeries,
-        Integer numeroRepeticiones
-
+        Integer numeroRepeticiones,
+        String nombreEjercicio
 ) {
 }

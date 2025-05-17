@@ -6,7 +6,7 @@ import co.edu.uniquindio.proyecto.modelo.entrenador.Rutina;
 import org.mapstruct.*;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = {EjercicioRutinaMapper.class})
 public interface RutinaMapper {
 
     @Mapping(target = "codPlanEntrenamiento", expression = "java(obtenerCodPlan(rutina))")
