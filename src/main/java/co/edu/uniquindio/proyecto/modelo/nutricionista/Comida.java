@@ -14,6 +14,7 @@ import java.util.List;
 public class Comida {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codComida;
 
     private String nombre;

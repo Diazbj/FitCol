@@ -40,7 +40,7 @@ public class IngredienteServicioImpl implements IngredienteServicio {
     }
 
     @Override
-    public List<IngredienteDTO> obtenerIngredientes() {
+    public List<IngredienteDTO> obtenerIngredientes() throws Exception {
         return ingredienteRepo
                 .findAll()
                 .stream()

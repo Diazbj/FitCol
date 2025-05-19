@@ -41,9 +41,9 @@ public class IngredienteControlador {
 
     @GetMapping
     @Operation(summary = "obtener todos los ingredientes")
-    public ResponseEntity<List<IngredienteDTO>> obtenerIngredientes() throws Exception {
+    public ResponseEntity<MensajeDTO<List<IngredienteDTO>>> obtenerIngredientes() throws Exception {
         List<IngredienteDTO> ingredientes = ingredienteServicio.obtenerIngredientes();
-        return ResponseEntity.ok(new ArrayList<>(ingredientes));
+        return ResponseEntity.ok(new MensajeDTO<>(false, ingredientes));
     }
 
     @DeleteMapping("{nombre}")
