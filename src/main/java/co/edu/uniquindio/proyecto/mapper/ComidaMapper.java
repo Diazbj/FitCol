@@ -6,7 +6,7 @@ import co.edu.uniquindio.proyecto.dto.comida.CrearComidaDTO;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.Comida;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = {ComidaIngredienteMapper.class})
 public interface ComidaMapper {
 
     Comida fromCrearComida(CrearComidaDTO crearComidaDTO);

@@ -16,6 +16,7 @@ import java.util.List;
 public class PlanAlimenticio {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codPlanAlimenticio;
 
     @Column(columnDefinition = "TEXT")
@@ -30,10 +31,10 @@ public class PlanAlimenticio {
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "Nutricionista_Cliente_Usuario_codigo")
+    @JoinColumn(name = "usuario_id")
     private Nutricionista nutricionista;
 
-    @OneToMany(mappedBy = "planAlimenticio")
+    @OneToMany(mappedBy = "planAlimenticio",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<ComidaPlanAli> comidas;
 
 }

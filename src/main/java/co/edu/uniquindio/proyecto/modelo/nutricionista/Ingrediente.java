@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.modelo.nutricionista;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -20,6 +21,6 @@ public class Ingrediente {
 
     private Double precioPromedio;
 
-    @OneToMany(mappedBy = "ingrediente")
+    @OneToMany(mappedBy = "ingrediente",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<ComidaIngrediente> comidas;
 }

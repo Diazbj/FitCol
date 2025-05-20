@@ -2,9 +2,10 @@ package co.edu.uniquindio.proyecto.controladores;
 
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.dto.comida.AsignarComidaDTO;
 import co.edu.uniquindio.proyecto.dto.comida.ComidaDTO;
 import co.edu.uniquindio.proyecto.dto.comida.CrearComidaDTO;
-import co.edu.uniquindio.proyecto.dto.ingrediente.CrearIngredienteDTO;
+import co.edu.uniquindio.proyecto.dto.comida.IngredienteComidaDTO;
 import co.edu.uniquindio.proyecto.servicios.ComidaServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -51,8 +52,23 @@ public class ComidaControlador {
     public ResponseEntity<MensajeDTO<String>> eliminarComida(@PathVariable Long id) throws Exception{
         comidaServicio.eliminarComida(id);
         return ResponseEntity.ok(new MensajeDTO<>(true,"Comida eliminada"));
-
-
     }
+
+
+
+    @PostMapping("/asignarComidaAPlan")
+    @Operation(summary = "Asignar comida a plan")
+    public ResponseEntity<MensajeDTO<String>> asignarComidaAPlanAlimenticio (@RequestBody AsignarComidaDTO dto)throws Exception{
+        comidaServicio.asignarComidaAPlanAlimenticio(dto);
+        return ResponseEntity.ok(new MensajeDTO<>(true,"Comida asignada"));
+    }
+
+    @GetMapping("/plan/{id}")
+    @Operation(summary = "listar Comidas por plan alimenticio")
+    public ResponseEntity<MensajeDTO<List<ComidaDTO>>> listarComidasPorPlan(@PathVariable Long id) throws Exception{
+        List<ComidaDTO> comidas =comidaServicio.listarComidasPorPlan(id);
+        return ResponseEntity.ok(new MensajeDTO<>(true,comidas));
+    }
+
 
 }

@@ -23,6 +23,9 @@ public class Comida {
     private Integer carbohidratos;
     private Integer grasa;
 
-    @OneToMany(mappedBy = "comida")
+    @OneToMany(mappedBy = "comida", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<ComidaIngrediente> ingredientes;
+
+    @OneToMany(mappedBy = "comida", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<ComidaPlanAli> comidaPlanAli;
 }

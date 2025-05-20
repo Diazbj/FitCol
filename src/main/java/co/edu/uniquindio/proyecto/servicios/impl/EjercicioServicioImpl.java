@@ -28,6 +28,8 @@ public class EjercicioServicioImpl implements EjercicioServicio {
     private final EjercicioRepo ejercicioRepo;
     private final EjercicioMapper ejercicioMapper;
     private final ClienteServicioImpl clienteServicioImpl;
+
+
     @Autowired
     private EjercicioRutinaMapper ejercicioRutinaMapper;
 

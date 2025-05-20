@@ -9,7 +9,8 @@ public record CrearComidaDTO(
          Integer porcion,
          Integer proteinas,
          Integer carbohidratos,
-         Integer grasa
+         Integer grasa,
+         Long codPlanAlimenticio
 
 ) {
 }

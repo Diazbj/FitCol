@@ -2,6 +2,8 @@ package co.edu.uniquindio.proyecto.controladores;
 
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.dto.comida.ComidaDTO;
+import co.edu.uniquindio.proyecto.dto.comida.IngredienteComidaDTO;
 import co.edu.uniquindio.proyecto.dto.ingrediente.CrearIngredienteDTO;
 import co.edu.uniquindio.proyecto.dto.ingrediente.IngredienteDTO;
 import co.edu.uniquindio.proyecto.servicios.IngredienteServicio;
@@ -52,4 +54,19 @@ public class IngredienteControlador {
         ingredienteServicio.eliminarIngrediente(nombre);
         return ResponseEntity.ok(new MensajeDTO<>(true, "Ingrediente eliminado"));
     }
+
+    @GetMapping("/comida/{id}")
+    @Operation(summary = "Obtener ingredientes por comida")
+    public ResponseEntity<MensajeDTO<List<IngredienteDTO>>> obtenerIngredientesPorComida(@PathVariable Long id) throws Exception {
+     List<IngredienteDTO> ingredientes=ingredienteServicio.obtenerIngredientesPorComidas(id);
+     return ResponseEntity.ok(new MensajeDTO<>(false, ingredientes));
+    }
+
+    @PostMapping("/asignarIngrdiente")
+    @Operation(summary = "Asignar Ingrediente a comida")
+    public ResponseEntity<MensajeDTO<IngredienteComidaDTO>> asignarIngredienteAComida(@Valid @RequestBody IngredienteComidaDTO ingredienteComidaDTO) throws Exception{
+        IngredienteComidaDTO resultado = ingredienteServicio.asignarIngredienteAComida(ingredienteComidaDTO);
+        return ResponseEntity.ok(new MensajeDTO<>(true,resultado));
+    }
+
 }
