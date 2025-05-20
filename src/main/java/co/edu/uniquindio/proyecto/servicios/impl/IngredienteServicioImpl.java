@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 
-import co.edu.uniquindio.proyecto.dto.comida.ComidaDTO;
 import co.edu.uniquindio.proyecto.dto.comida.IngredienteComidaDTO;
 import co.edu.uniquindio.proyecto.dto.ingrediente.CrearIngredienteDTO;
 import co.edu.uniquindio.proyecto.dto.ingrediente.IngredienteDTO;
@@ -12,13 +11,12 @@ import co.edu.uniquindio.proyecto.modelo.nutricionista.ComidaIngrediente;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.Ingrediente;
 import co.edu.uniquindio.proyecto.repositorio.ComidaIngredienteRepo;
 import co.edu.uniquindio.proyecto.repositorio.ComidaRepo;
-import co.edu.uniquindio.proyecto.repositorio.IngredienteRepo;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.IngredienteRepo;
 import co.edu.uniquindio.proyecto.servicios.IngredienteServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

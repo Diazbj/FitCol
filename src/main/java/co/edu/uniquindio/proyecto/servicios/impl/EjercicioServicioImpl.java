@@ -10,7 +10,7 @@ import co.edu.uniquindio.proyecto.modelo.entrenador.EjercicioRutina;
 import co.edu.uniquindio.proyecto.modelo.entrenador.Rutina;
 import co.edu.uniquindio.proyecto.repositorio.EjercicioRepo;
 import co.edu.uniquindio.proyecto.repositorio.EjercicioRutinaRepo;
-import co.edu.uniquindio.proyecto.repositorio.RutinaRepo;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.RutinaRepo;
 import co.edu.uniquindio.proyecto.servicios.EjercicioServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,6 +8,7 @@ import co.edu.uniquindio.proyecto.dto.rutina.RutinaCompletaDTO;
 import co.edu.uniquindio.proyecto.mapper.RutinaMapper;
 import co.edu.uniquindio.proyecto.modelo.entrenador.*;
 import co.edu.uniquindio.proyecto.repositorio.*;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.RutinaRepo;
 import co.edu.uniquindio.proyecto.servicios.RutinaServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

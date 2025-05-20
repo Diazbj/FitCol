@@ -53,6 +53,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/nutricionistas").hasAuthority("ROLE_NUTRICIONISTA")
                         .requestMatchers("/api/nutricionistas/**").hasAuthority("ROLE_NUTRICIONISTA")
                         .requestMatchers("/api/ingrediente/**").hasAuthority("ROLE_NUTRICIONISTA")
+                        .requestMatchers("/api/progreso/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex.authenticationEntryPoint( new AutenticacionEntryPoint() ))

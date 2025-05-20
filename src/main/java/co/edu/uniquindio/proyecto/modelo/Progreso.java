@@ -17,9 +17,11 @@ import java.time.LocalDate;
 public class Progreso {
 
     @Id
+    private String usuarioId;
+
     @OneToOne
-    @JoinColumn(name = "Cliente_Usuario_codigo")
-    private Cliente cliente;
+    @JoinColumn(name = "usuario_id", insertable = false, updatable = false)
+    private Cliente cliente;   // Aquí se mapea la relación
 
     private Double peso;
     private LocalDate fechaRegistro;

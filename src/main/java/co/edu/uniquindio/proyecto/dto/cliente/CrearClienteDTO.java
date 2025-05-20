@@ -9,7 +9,7 @@ import java.util.List;
 public record CrearClienteDTO(
         @NotBlank @Length(max = 100) String usuarioId,
         @NotBlank @Length(max = 100) String primerNombre,
-        @NotBlank @Length(max = 100) String segundoNombre,
+        String segundoNombre,
         @NotBlank @Length(min = 7, max = 20) String password,
         @NotBlank @Length(max = 100) String primerApellido,
         @NotBlank @Length(max = 100) String segundoApellido,

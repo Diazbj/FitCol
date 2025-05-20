@@ -3,17 +3,15 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.comida.AsignarComidaDTO;
 import co.edu.uniquindio.proyecto.dto.comida.ComidaDTO;
 import co.edu.uniquindio.proyecto.dto.comida.CrearComidaDTO;
-import co.edu.uniquindio.proyecto.dto.comida.IngredienteComidaDTO;
 import co.edu.uniquindio.proyecto.mapper.ComidaIngredienteMapper;
 import co.edu.uniquindio.proyecto.mapper.ComidaMapper;
-import co.edu.uniquindio.proyecto.mapper.PlanAlimenticioMapper;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.*;
 import co.edu.uniquindio.proyecto.repositorio.*;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.IngredienteRepo;
 import co.edu.uniquindio.proyecto.servicios.ComidaServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

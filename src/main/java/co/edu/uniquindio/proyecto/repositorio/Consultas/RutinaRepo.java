@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.repositorio;
+package co.edu.uniquindio.proyecto.repositorio.Consultas;
 
 
 import co.edu.uniquindio.proyecto.modelo.entrenador.Rutina;
