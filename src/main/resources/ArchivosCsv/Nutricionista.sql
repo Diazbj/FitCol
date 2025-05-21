@@ -1,0 +1,8 @@
+INSERT INTO `nutricionista` VALUES 
+(2,'1094886820');
+
+INSERT INTO `nutricionista` VALUES 
+(2,'1094886821'),
+(5,'1094886822'),
+(7,'1094886823'),
+(12,'1094886824');
