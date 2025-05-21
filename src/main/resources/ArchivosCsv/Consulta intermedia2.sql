@@ -4,6 +4,6 @@ SELECT
     ROUND(AVG(indicemc), 2) AS imc_semana,
     ROUND(AVG(ent_completos), 2) AS ent_completos_semana
 FROM progreso
-WHERE usuario_id = 1098337495
+WHERE usuario_id = 1098337497
 GROUP BY semana
 ORDER BY semana;
