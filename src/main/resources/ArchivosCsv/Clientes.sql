@@ -1,0 +1,14 @@
+INSERT INTO `cliente` VALUES (160, '1998-03-15', 'https://historialmedico.com/1098337496', 58, 'Femenino', '1098337496');
+INSERT INTO `cliente` VALUES (175, '1995-11-02', 'https://historialmedico.com/1098337497', 72, 'Masculino', '1098337497');
+INSERT INTO `cliente` VALUES (162, '2000-01-30', 'https://historialmedico.com/1098337498', 60, 'Femenino', '1098337498');
+INSERT INTO `cliente` VALUES (180, '1997-07-12', 'https://historialmedico.com/1098337499', 75, 'Masculino', '1098337499');
+INSERT INTO `cliente` VALUES (165, '1999-06-08', 'https://historialmedico.com/1098337500', 63, 'Femenino', '1098337500');
+INSERT INTO `cliente` VALUES (178, '1996-09-22', 'https://historialmedico.com/1098337501', 80, 'Masculino', '1098337501');
+INSERT INTO `cliente` VALUES (159, '2001-04-18', 'https://historialmedico.com/1098337502', 55, 'Femenino', '1098337502');
+INSERT INTO `cliente` VALUES (173, '1995-02-10', 'https://historialmedico.com/1098337503', 70, 'Masculino', '1098337503');
+INSERT INTO `cliente` VALUES (160, '1998-10-04', 'https://historialmedico.com/1098337504', 59, 'Femenino', '1098337504');
+INSERT INTO `cliente` VALUES (176, '1997-12-19', 'https://historialmedico.com/1098337505', 74, 'Masculino', '1098337505');
+INSERT INTO `cliente` VALUES (161, '2000-08-25', 'https://historialmedico.com/1098337506', 56, 'Femenino', '1098337506');
+INSERT INTO `cliente` VALUES (177, '1996-03-01', 'https://historialmedico.com/1098337507', 78, 'Masculino', '1098337507');
+INSERT INTO `cliente` VALUES (158, '2002-05-09', 'https://historialmedico.com/1098337508', 54, 'Femenino', '1098337508');
+INSERT INTO `cliente` VALUES (180, '1995-06-17', 'https://historialmedico.com/1098337509', 76, 'Masculino', '1098337509');

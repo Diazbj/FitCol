@@ -1,0 +1,1 @@
+INSERT INTO `departamento` VALUES (1,'Cundinamarca'),(2,'Atlantico'),(3,'Risaralda'),(4,'Norte de Santander'),(5,'Antioquia'),(6,'Quindio');
