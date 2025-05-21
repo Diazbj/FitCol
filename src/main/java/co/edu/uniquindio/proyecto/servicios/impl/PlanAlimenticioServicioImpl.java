@@ -68,7 +68,10 @@ public class PlanAlimenticioServicioImpl implements PlanAlimenticioServicio {
 
     @Override
     public List<PlanAlimenticioDTO> listarPlanesAlimenticios() {
-        return planRepo.findAll().stream()
+
+        String id= clienteServicioImpl.obtenerIdSesion();
+
+        return planRepo.findByNutricionista_UsuarioId(id).stream()
                 .map(planAlimenticioMapper::toDTO)
                 .toList();
     }

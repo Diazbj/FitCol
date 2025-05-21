@@ -44,6 +44,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/entrenadores").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/clientes").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/nutricionistas").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/clientes/recomendacion").hasAuthority("ROLE_CLIENTE")
+                        .requestMatchers(HttpMethod.GET,"/api/clientes//progreso-semanal").hasAuthority("ROLE_CLIENTE")
                         .requestMatchers("/api/clientes/**").hasAuthority("ROLE_CLIENTE")
                         .requestMatchers("/api/entrenadores/**").hasAuthority("ROLE_ENTRENADOR")
                         .requestMatchers("/api/planEntrenamiento/**").hasAuthority("ROLE_ENTRENADOR")

@@ -48,8 +48,9 @@ public class PlanEntrenamientoControlador {
     @GetMapping
     @Operation(summary = "Listar todos los planes")
     @SecurityRequirement(name = "bearerAuth")
-    public ResponseEntity<MensajeDTO<List<PlanEntrenamientoDTO>>> listar() {
-        return ResponseEntity.ok(new MensajeDTO<>(false, planEntrenamientoServicio.listarPlanesEntrenamiento()));
+    public ResponseEntity<MensajeDTO<List<PlanEntrenamientoDTO>>> listar() throws Exception {
+        List<PlanEntrenamientoDTO> planes=planEntrenamientoServicio.listarPlanesEntrenamiento();
+        return ResponseEntity.ok(new MensajeDTO<>(false, planes));
     }
 
     @SecurityRequirement(name = "bearerAuth")

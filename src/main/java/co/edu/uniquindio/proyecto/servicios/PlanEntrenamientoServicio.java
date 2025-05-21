@@ -9,6 +9,6 @@ public interface PlanEntrenamientoServicio {
     void crearPlanEntrenamiento(CrearPlanEntrenamientoDTO dto) throws Exception;
     void editarPlanEntrenamiento(Long id, CrearPlanEntrenamientoDTO dto) throws Exception;
     PlanEntrenamientoDTO obtenerPlanEntrenamiento(Long id) throws Exception;
-    List<PlanEntrenamientoDTO> listarPlanesEntrenamiento();
+    List<PlanEntrenamientoDTO> listarPlanesEntrenamiento() throws Exception;
     void eliminarPlanEntrenamiento(Long id) throws Exception;
 }

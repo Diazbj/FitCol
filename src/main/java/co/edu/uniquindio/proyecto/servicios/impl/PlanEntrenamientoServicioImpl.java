@@ -77,8 +77,10 @@ public class PlanEntrenamientoServicioImpl implements PlanEntrenamientoServicio 
     }
 
     @Override
-    public List<PlanEntrenamientoDTO> listarPlanesEntrenamiento() {
-        return planRepo.findAll().stream()
+    public List<PlanEntrenamientoDTO> listarPlanesEntrenamiento() throws Exception {
+        String id=clienteServicioImpl.obtenerIdSesion();
+
+        return planRepo.findByEntrenador_UsuarioId(id).stream()
                 .map(mapper::toDTO)
                 .toList();
     }

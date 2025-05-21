@@ -1,14 +1,12 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
-import co.edu.uniquindio.proyecto.dto.cliente.CrearClienteDTO;
-import co.edu.uniquindio.proyecto.dto.cliente.EditarClienteDTO;
-import co.edu.uniquindio.proyecto.dto.cliente.ClienteDTO;
+import co.edu.uniquindio.proyecto.dto.cliente.*;
 import co.edu.uniquindio.proyecto.mapper.ClienteMapper;
 import co.edu.uniquindio.proyecto.modelo.Cliente;
 import co.edu.uniquindio.proyecto.modelo.vo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import co.edu.uniquindio.proyecto.repositorio.CiudadRepo;
-import co.edu.uniquindio.proyecto.repositorio.ClienteRepo;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.ClienteRepo;
 import co.edu.uniquindio.proyecto.servicios.ClienteServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -117,6 +115,46 @@ public class ClienteServicioImpl implements ClienteServicio {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user.getUsername();
     }
+
+    @Override
+    public RecomendacionEntrenamientoDTO obtenerRecomendacionEntrenamiento() throws Exception {
+        String id = obtenerIdSesion();
+
+        if (id == null || id.isBlank()) {
+            throw new IllegalArgumentException("El ID de sesión no puede ser nulo ni vacío");
+        }
+
+        System.out.println("Obteniendo recomendación para usuario con ID: " + id);
+
+        RecomendacionEntrenamientoDTO recomendacion = clienteRepo.obtenerRecomendacionPorEdad(id);
+
+        if (recomendacion == null) {
+            System.out.println("No se encontró recomendación para el usuario con ID: " + id);
+            throw new Exception("No se encontró recomendación para el usuario.");
+        } else {
+            System.out.println("Recomendación obtenida: " + recomendacion);
+        }
+
+        return recomendacion;
+    }
+
+    @Override
+    public List<ProgresoSemanalDTO> obtenerProgresoSemanal() throws Exception {
+
+        String id=obtenerIdSesion();
+        if (id == null) {
+            throw new IllegalArgumentException("El ID del usuario no puede ser nulo.");
+        }
+
+        List<ProgresoSemanalDTO> progresos = clienteRepo.obtenerProgresoSemanal(id);
+
+        if (progresos.isEmpty()) {
+            throw new Exception("No se encontró progreso semanal para el usuario.");
+        }
+
+        return progresos;
+    }
+
 
 
 }

@@ -1,9 +1,7 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
-import co.edu.uniquindio.proyecto.dto.cliente.CrearClienteDTO;
-import co.edu.uniquindio.proyecto.dto.cliente.ClienteDTO;
-import co.edu.uniquindio.proyecto.dto.cliente.EditarClienteDTO;
+import co.edu.uniquindio.proyecto.dto.cliente.*;
 import co.edu.uniquindio.proyecto.servicios.ClienteServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -11,6 +9,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,6 +46,22 @@ public class ClienteControlador {
     public ResponseEntity<MensajeDTO<String>> editarCliente(@Valid @RequestBody EditarClienteDTO editarCliente)throws Exception {
         clienteServicio.editarCliente(editarCliente);
         return ResponseEntity.ok(new MensajeDTO<>(true, "Cliente editado"));
+    }
+
+    @GetMapping("/recomendacion")
+    @Operation(summary = "Recomendaciones de planes")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<MensajeDTO<RecomendacionEntrenamientoDTO>> obtenerRecomendacionEntrenamiento()throws Exception{
+        RecomendacionEntrenamientoDTO recomendacionEntrenamientoDTO=clienteServicio.obtenerRecomendacionEntrenamiento();
+        return ResponseEntity.ok(new MensajeDTO<>(true, recomendacionEntrenamientoDTO));
+    }
+
+    @GetMapping("/progreso-semanal")
+    @Operation(summary = "Obtener progreso semanal")
+    @SecurityRequirement(name="bearerAuth")
+    public ResponseEntity<MensajeDTO<List<ProgresoSemanalDTO>>> obtenerProgresoSemanal()throws Exception{
+        List<ProgresoSemanalDTO> progresoSemanal=clienteServicio.obtenerProgresoSemanal();
+        return ResponseEntity.ok(new MensajeDTO<>(false,progresoSemanal));
     }
 
 }

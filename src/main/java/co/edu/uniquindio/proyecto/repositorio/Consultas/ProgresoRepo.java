@@ -15,16 +15,16 @@ public interface ProgresoRepo extends JpaRepository<Progreso, Long> {
     SELECT 
         u.primer_nombre,
         u.segundo_apellido,
-        p.cliente_usuario_codigo AS cliente_id,
+        p.usuario_id AS cliente_id,
         SUM(p.ent_completos) AS total
     FROM 
         Progreso p
     JOIN 
-        Cliente c ON p.cliente_usuario_codigo = c.usuario_id
+        Cliente c ON p.usuario_id = c.usuario_id
     JOIN 
         Usuario u ON c.usuario_id = u.usuario_id
     GROUP BY 
-        p.cliente_usuario_codigo
+        p.usuario_id
     HAVING 
         total >= 5
     ORDER BY 

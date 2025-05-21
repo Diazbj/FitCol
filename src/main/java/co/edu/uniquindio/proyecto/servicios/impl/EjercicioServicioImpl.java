@@ -11,6 +11,7 @@ import co.edu.uniquindio.proyecto.modelo.entrenador.Rutina;
 import co.edu.uniquindio.proyecto.repositorio.EjercicioRepo;
 import co.edu.uniquindio.proyecto.repositorio.EjercicioRutinaRepo;
 import co.edu.uniquindio.proyecto.repositorio.Consultas.RutinaRepo;
+import co.edu.uniquindio.proyecto.servicios.ClienteServicio;
 import co.edu.uniquindio.proyecto.servicios.EjercicioServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,8 @@ public class EjercicioServicioImpl implements EjercicioServicio {
 
     @Override
     public List<EjercicioDTO> listarEjercicios() {
+
+
         return ejercicioRepo.findAll()
                 .stream()
                 .map(ejercicioMapper::toDTO)

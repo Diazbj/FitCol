@@ -1,9 +1,9 @@
 SELECT 
-    DATE_TRUNC('week', fecha) AS semana,
+    STR_TO_DATE(CONCAT(YEAR(fecha_registro), ' ', WEEK(fecha_registro, 1), ' Monday'), '%X %V %W') AS semana,
     ROUND(AVG(peso), 2) AS peso_semana,
-    ROUND(AVG(imc), 2) AS imc_semana,
-    ROUND(AVG(resistencia_cardio), 2) AS resistencia_semana
-FROM progreso_usuarios
-WHERE usuario_id = usuario_id
-GROUP BY DATE_TRUNC('week', fecha)
+    ROUND(AVG(indicemc), 2) AS imc_semana,
+    ROUND(AVG(ent_completos), 2) AS ent_completos_semana
+FROM progreso
+WHERE usuario_id = 1098337495
+GROUP BY semana
 ORDER BY semana;
