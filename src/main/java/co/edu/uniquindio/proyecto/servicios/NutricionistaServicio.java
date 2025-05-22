@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.dto.nutricionista.TituloDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.CrearNutricionistaDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.EditarNutricionistaDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.NutricionistaDTO;
+import co.edu.uniquindio.proyecto.dto.nutricionista.*;
 
 import java.util.List;
 
@@ -17,4 +14,5 @@ public interface NutricionistaServicio {
     void eliminarTitulo(String id) throws Exception;
     TituloDTO obtenerTitulo(String id) throws Exception;
     List<TituloDTO> obtenerTitulos(String id) throws Exception;
+    List<ClienteSuscritoDTO> obtenerClienteSuscrito() throws Exception;
 }

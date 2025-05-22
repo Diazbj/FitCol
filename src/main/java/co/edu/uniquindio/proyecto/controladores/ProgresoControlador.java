@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.controladores;
 
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.dto.progreso.PlanesDeficitDTO;
 import co.edu.uniquindio.proyecto.dto.progreso.RankingClienteDTO;
 import co.edu.uniquindio.proyecto.servicios.ProgresoServicio;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,5 +27,12 @@ public class ProgresoControlador {
         List<RankingClienteDTO> ranking= progresoServicio.obtenerRanking();
         return ResponseEntity.ok(new MensajeDTO<>(false,ranking));
 
+    }
+
+    @GetMapping("/planes-deficit")
+    @Operation(summary = "planes con cantidad de claorias diarias bajas")
+    public ResponseEntity<MensajeDTO<List<PlanesDeficitDTO>>> obtenerPlanesDeficit()throws Exception{
+        List<PlanesDeficitDTO> planesDeficit= progresoServicio.obtenerPlanesDeficit();
+        return ResponseEntity.ok(new MensajeDTO<>(true,planesDeficit));
     }
 }

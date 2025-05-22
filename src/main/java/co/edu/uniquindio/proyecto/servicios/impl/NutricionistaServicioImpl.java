@@ -1,20 +1,15 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
-import co.edu.uniquindio.proyecto.dto.nutricionista.TituloDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.CrearNutricionistaDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.EditarNutricionistaDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.NutricionistaDTO;
+import co.edu.uniquindio.proyecto.dto.nutricionista.*;
 import co.edu.uniquindio.proyecto.mapper.NutricionistaMapper;
 import co.edu.uniquindio.proyecto.mapper.TituloMapper;
-import co.edu.uniquindio.proyecto.modelo.entrenador.Entrenador;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.TituloUniversitario;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.Nutricionista;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.NutricionistaTitulo;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.NutricionistaTituloId;
-import co.edu.uniquindio.proyecto.modelo.vo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import co.edu.uniquindio.proyecto.repositorio.CiudadRepo;
-import co.edu.uniquindio.proyecto.repositorio.NutricionistaRepo;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.NutricionistaRepo;
 import co.edu.uniquindio.proyecto.repositorio.NutricionistaTituloRepo;
 import co.edu.uniquindio.proyecto.repositorio.TituloRepo;
 import co.edu.uniquindio.proyecto.servicios.NutricionistaServicio;
@@ -184,6 +179,12 @@ public class NutricionistaServicioImpl implements NutricionistaServicio {
         return titulos.stream()
                 .map(tituloMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClienteSuscritoDTO> obtenerClienteSuscrito() throws Exception {
+        String id = clienteServicioImpl.obtenerIdSesion();
+        return nutricionistaRepo.findClientesPorNutricionista(id);
     }
 
 }

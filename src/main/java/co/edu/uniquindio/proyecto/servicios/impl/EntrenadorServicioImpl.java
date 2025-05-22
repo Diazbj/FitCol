@@ -1,21 +1,20 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.entrenador.*;
-import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.mapper.CertificadoMapper;
 import co.edu.uniquindio.proyecto.mapper.EntrenadorMapper;
 import co.edu.uniquindio.proyecto.mapper.PlanEntrenamientoMapper;
 import co.edu.uniquindio.proyecto.modelo.entrenador.*;
-import co.edu.uniquindio.proyecto.modelo.vo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.vo.UsuarioTelefono;
 import co.edu.uniquindio.proyecto.repositorio.*;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.EntrenadorRepo;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -135,6 +134,26 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
 
         // 4. Guardar la relación
         entrenadorCertificacionRepo.save(relacion);
+    }
+
+    @Override
+    public List<EntrenadoresDestacadoDTO> obtenerEntrenadoresDestacados()throws Exception{
+        List<Object[]> resultados = entrenadorRepo.obtenerEntrenadoresDestacados();
+
+        return resultados.stream()
+                .map(obj -> new EntrenadoresDestacadoDTO(
+                        (String) obj[0],                   // usuarioId
+                        (String) obj[1],                   // nombre
+                        (String) obj[2],                   // apellido
+                        ((Number) obj[3]).longValue()      // cantidadPlanes
+                ))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CertificadoEntrenadorDTO> obtenerInformacionEntrenador()throws Exception{
+        String id=clienteServicioImpl.obtenerIdSesion();
+        return entrenadorRepo.obtenerInfoEntrenadorPorId(id);
     }
 
 

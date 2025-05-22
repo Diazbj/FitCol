@@ -7,7 +7,7 @@ import co.edu.uniquindio.proyecto.mapper.PlanEntrenamientoMapper;
 import co.edu.uniquindio.proyecto.modelo.entrenador.Entrenador;
 import co.edu.uniquindio.proyecto.modelo.entrenador.PlanEntrenamiento;
 import co.edu.uniquindio.proyecto.modelo.entrenador.TipoEntrenamiento;
-import co.edu.uniquindio.proyecto.repositorio.EntrenadorRepo;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.EntrenadorRepo;
 import co.edu.uniquindio.proyecto.repositorio.PlanEntrenamientoRepo;
 import co.edu.uniquindio.proyecto.repositorio.TipoEntrenamientoRepo;
 import co.edu.uniquindio.proyecto.servicios.PlanEntrenamientoServicio;

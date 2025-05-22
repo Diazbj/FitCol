@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/entrenadores")
@@ -54,6 +56,22 @@ public class EntrenadorControlador {
     public ResponseEntity<MensajeDTO<String>> subirCertificado(@Valid @RequestBody CertificacionDTO certificacionDTO)throws Exception{
         entrenadorServicio.subirCertificado(certificacionDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su certificado se ha registrado con exito"));
+    }
+
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping("/destacados")
+    @Operation(summary="Obtener entrenadores destacados")
+    public ResponseEntity<MensajeDTO<List<EntrenadoresDestacadoDTO>>> obtenerEntrenadoresDestacados()throws Exception{
+        List<EntrenadoresDestacadoDTO> entrenadoresDestacadoDTOS=entrenadorServicio.obtenerEntrenadoresDestacados();
+        return ResponseEntity.ok(new MensajeDTO<>(true, entrenadoresDestacadoDTOS));
+    }
+
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping("/informacion")
+    @Operation(summary="Obtener informacion de entrenador")
+    public ResponseEntity<MensajeDTO<List<CertificadoEntrenadorDTO>>> obtenerInformacionEntrenador()throws Exception{
+        List<CertificadoEntrenadorDTO> certificadoEntrenadorDTOS=entrenadorServicio.obtenerInformacionEntrenador();
+        return ResponseEntity.ok(new MensajeDTO<>(true, certificadoEntrenadorDTOS));
     }
 
 

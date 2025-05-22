@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface ClienteRepo extends JpaRepository<Cliente, String> {
 
+    /*------------------------------------Consulta Avanzada 1 ----------------------------------------------------------------------------------*/
+
     @Query(value = """
 
             SELECT\s
@@ -39,7 +41,9 @@ public interface ClienteRepo extends JpaRepository<Cliente, String> {
             WHERE u.usuario_id = :usuarioId
         """, nativeQuery = true)
     RecomendacionEntrenamientoDTO obtenerRecomendacionPorEdad(@Param("usuarioId") String usuarioId);
+    /*------------------------------------Consulta Avanzada 1 ----------------------------------------------------------------------------------*/
 
+    /*------------------------------------Consulta Intermedia 1 ----------------------------------------------------------------------------------*/
 
     @Query(value = """
     SELECT 
@@ -53,5 +57,7 @@ public interface ClienteRepo extends JpaRepository<Cliente, String> {
     ORDER BY semana
 """, nativeQuery = true)
     List<ProgresoSemanalDTO> obtenerProgresoSemanal(@Param("usuarioId") String usuarioId);
+
+    /*------------------------------------Consulta Intermedia 1 ----------------------------------------------------------------------------------*/
 
 }

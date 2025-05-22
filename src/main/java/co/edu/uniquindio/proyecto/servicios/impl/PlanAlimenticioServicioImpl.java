@@ -5,7 +5,7 @@ import co.edu.uniquindio.proyecto.dto.planAlimenticio.PlanAlimenticioDTO;
 import co.edu.uniquindio.proyecto.mapper.PlanAlimenticioMapper;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.Nutricionista;
 import co.edu.uniquindio.proyecto.modelo.nutricionista.PlanAlimenticio;
-import co.edu.uniquindio.proyecto.repositorio.NutricionistaRepo;
+import co.edu.uniquindio.proyecto.repositorio.Consultas.NutricionistaRepo;
 import co.edu.uniquindio.proyecto.repositorio.PlanAlimenticioRepo;
 
 import co.edu.uniquindio.proyecto.servicios.PlanAlimenticioServicio;

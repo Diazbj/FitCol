@@ -42,6 +42,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**","/api/login/**","/api/ciudades","api/nutricionistas/Titulo/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/entrenadores").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/entrenadores/destacados").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/entrenadores/informacion").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/clientes").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/nutricionistas").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/clientes/recomendacion").hasAuthority("ROLE_CLIENTE")

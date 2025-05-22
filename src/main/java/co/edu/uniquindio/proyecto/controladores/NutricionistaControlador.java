@@ -2,10 +2,7 @@ package co.edu.uniquindio.proyecto.controladores;
 
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.TituloDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.CrearNutricionistaDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.EditarNutricionistaDTO;
-import co.edu.uniquindio.proyecto.dto.nutricionista.NutricionistaDTO;
+import co.edu.uniquindio.proyecto.dto.nutricionista.*;
 import co.edu.uniquindio.proyecto.servicios.NutricionistaServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -88,6 +85,15 @@ public class NutricionistaControlador {
     public ResponseEntity<MensajeDTO<List<TituloDTO>>> obtenerTitulos(@PathVariable String id)throws Exception{
         List<TituloDTO> titulos= nutricionistaServicio.obtenerTitulos(id);
         return ResponseEntity.ok(new MensajeDTO<>(false,titulos));
+    }
+
+    @GetMapping("/suscritos")
+    @Operation(summary = "Clientes suscrito a planes")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<MensajeDTO<List<ClienteSuscritoDTO>>> obtenerSuscritos() throws Exception{
+        List<ClienteSuscritoDTO> clienteSuscritoDTOS=nutricionistaServicio.obtenerClienteSuscrito();
+        return ResponseEntity.ok(new MensajeDTO<>(false,clienteSuscritoDTOS));
+
     }
 
 }

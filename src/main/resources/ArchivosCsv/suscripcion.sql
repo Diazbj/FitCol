@@ -1,0 +1,15 @@
+INSERT INTO suscripcion (usuario_id, cod_factura, duracion, nombre, precio, cod_plan_alimenticio, cod_plan_entrenamiento) VALUES
+('1098337496', 1001, 3, 'Suscripción Básica', 360000, 2, 1),
+('1098337497', 1002, 6, 'Suscripción Plus', 480000, 3, 2),
+('1098337498', 1003, 1, 'Suscripción Mensual', 80000, 4, 3),
+('1098337499', 1004, 3, 'Suscripción Básica', 180000, 5, 4),
+('1098337500', 1005, 6, 'Suscripción Plus', 500000, 6, 5),
+('1098337501', 1006, 1, 'Suscripción Mensual', 99000, 7, 6),
+('1098337502', 1007, 3, 'Suscripción Básica', 190000, 8, 7),
+('1098337503', 1008, 6, 'Suscripción Premium', 650000, 9, 1),
+('1098337504', 1009, 1, 'Suscripción Mensual', 99000, 10, 2),
+('1098337505', 1010, 3, 'Suscripción Básica', 80000, 11, 3),
+('1098337506', 1011, 6, 'Suscripción Plus', 480000, 12, 4),
+('1098337507', 1012, 1, 'Suscripción Mensual', 99000, 13, 5),
+('1098337508', 1013, 3, 'Suscripción Básica',180000, 14, 6),
+('1098337509', 1014, 6, 'Suscripción Premium', 630000, 2, 7);

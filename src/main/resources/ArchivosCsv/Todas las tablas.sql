@@ -1,0 +1,33 @@
+use FitCol;
+SELECT * FROM administrador;
+SELECT * FROM asesoria_alim;
+SELECT * FROM asesoria_ent;
+SELECT * FROM beneficio;
+SELECT * FROM certificacion;
+SELECT * FROM ciudad;
+SELECT * FROM cliente;
+SELECT * FROM comida;
+SELECT * FROM comida_ingrediente;
+SELECT * FROM comida_plan_ali;
+SELECT * FROM departamento;
+SELECT * FROM ejercicio;
+SELECT * FROM ejercicio_rutina;
+SELECT * FROM entrenador;
+SELECT * FROM entrenador_certificacion;
+SELECT * FROM factura;
+SELECT * FROM ingrediente;
+SELECT * FROM metodo_pago;
+SELECT * FROM nutricionista;
+SELECT * FROM nutricionista_titulo;
+SELECT * FROM plan_alimenticio;
+SELECT * FROM plan_entrenamiento;
+SELECT * FROM progreso;
+SELECT * FROM rutina;
+SELECT * FROM rutina_plan_ent;
+SELECT * FROM suscripcion;
+SELECT * FROM tipo_entrenamiento;
+SELECT * FROM titulo_universitario;
+SELECT * FROM usuario;
+SELECT * FROM usuario_telefono;
+
+

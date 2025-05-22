@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface RutinaRepo extends JpaRepository<Rutina, Long> {
 
+    /*------------------------------------Consulta Simple 2 ----------------------------------------------------------------------------------*/
+
     @Query("""
     SELECT DISTINCT r FROM Rutina r
     LEFT JOIN FETCH r.ejercicios er
@@ -18,8 +20,13 @@ public interface RutinaRepo extends JpaRepository<Rutina, Long> {
 """)
     Rutina obtenerRutinaConEjercicios(@Param("id") Long id);
 
+    /*------------------------------------Consulta Simple 2 ----------------------------------------------------------------------------------*/
+
+    /*------------------------------------Consulta Simple 3 ----------------------------------------------------------------------------------*/
+
     @Query("SELECT DISTINCT r FROM Rutina r JOIN r.rutinaPlanEnts rpe JOIN rpe.planEntrenamiento pe WHERE pe.entrenador.usuarioId = :codigoEntrenador")
     List<Rutina> obtenerRutinasPorEntrenador(@Param("codigoEntrenador") String codigoEntrenador);
 
+    /*------------------------------------Consulta Simple 3 ----------------------------------------------------------------------------------*/
 
 }
