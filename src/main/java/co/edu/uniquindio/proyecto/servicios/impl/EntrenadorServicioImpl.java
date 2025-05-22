@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.entrenador.*;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanDificultadDTO;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.mapper.CertificadoMapper;
 import co.edu.uniquindio.proyecto.mapper.EntrenadorMapper;
 import co.edu.uniquindio.proyecto.mapper.PlanEntrenamientoMapper;
@@ -154,6 +156,10 @@ public class EntrenadorServicioImpl implements EntrenadorServicio {
     public List<CertificadoEntrenadorDTO> obtenerInformacionEntrenador()throws Exception{
         String id=clienteServicioImpl.obtenerIdSesion();
         return entrenadorRepo.obtenerInfoEntrenadorPorId(id);
+    }
+    @Override
+    public List<PlanDificultadDTO> listarPlanesPorDificultad() throws Exception {
+        return entrenadorRepo.obtenerPlanesPorDificultad();
     }
 
 

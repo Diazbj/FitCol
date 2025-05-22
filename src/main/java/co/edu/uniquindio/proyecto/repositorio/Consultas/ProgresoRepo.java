@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ProgresoRepo extends JpaRepository<Progreso, Long> {
 
-    /*------------------------------------Consulta Intermedia 4 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Intermedia 4 ok ---------------------------------------------------------------------------------8-*/
 
     @Query(value = """
     SELECT 
@@ -35,9 +35,9 @@ public interface ProgresoRepo extends JpaRepository<Progreso, Long> {
 """, nativeQuery = true)
     List<Object[]> obtenerTop5ClientesActivos();
 
-    /*------------------------------------Consulta Intermedia 4 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Intermedia 4 ---------------------------------------------------------------------------------8-*/
 
-    /*------------------------------------Consulta Avanzada 3 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Avanzada 3 ok ---------------------------------------------------------------------------------9-*/
 
     @Query(value = """
     SELECT 
@@ -77,6 +77,6 @@ public interface ProgresoRepo extends JpaRepository<Progreso, Long> {
     List<Object[]> obtenerPlanesDeficitNutricionistas();
 
 
-    /*------------------------------------Consulta Avanzada 3 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Avanzada 3 ---------------------------------------------------------------------------------9-*/
 
 }

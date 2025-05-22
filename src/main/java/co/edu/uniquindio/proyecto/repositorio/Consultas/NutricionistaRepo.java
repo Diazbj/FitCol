@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface NutricionistaRepo extends JpaRepository<Nutricionista, String> {
 
-    /*------------------------------------Consulta Intermedia 3 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Intermedia 3 ok --------------------------------------------------------------------------------7--*/
     @Query("""
     SELECT new co.edu.uniquindio.proyecto.dto.nutricionista.ClienteSuscritoDTO(
         u.usuarioId,
@@ -31,6 +31,6 @@ public interface NutricionistaRepo extends JpaRepository<Nutricionista, String> 
 """)
     List<ClienteSuscritoDTO> findClientesPorNutricionista(@Param("usuarioId") String usuarioId);
 
-    /*------------------------------------Consulta Intermedia 3 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Intermedia 3 --------------------------------------------------------------------------------7--*/
 
 }

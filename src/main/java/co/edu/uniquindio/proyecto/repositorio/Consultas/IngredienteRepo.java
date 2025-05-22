@@ -11,11 +11,11 @@ import java.util.List;
 @Repository
 public interface IngredienteRepo extends JpaRepository<Ingrediente, Integer> {
 
-    /*------------------------------------Consulta simple 1 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta simple 2 ok ---------------------------------------------------------------------------------6-*/
 
     @Query("SELECT ci.ingrediente FROM ComidaIngrediente ci WHERE ci.comida.codComida = :codComida")
     List<Ingrediente> buscarIngredientesPorCodComida(@Param("codComida") Long codComida);
 
-    /*------------------------------------Consulta simple 1 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta simple 2 ---------------------------------------------------------------------------------6-*/
     Ingrediente findBynombre(String nombre);
 }

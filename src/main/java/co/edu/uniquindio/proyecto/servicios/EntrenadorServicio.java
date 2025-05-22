@@ -2,6 +2,8 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.dto.entrenador.*;
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanDificultadDTO;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanEntrenamientoDTO;
 
 import java.util.List;
 
@@ -14,4 +16,5 @@ public interface EntrenadorServicio {
     void subirCertificado(CertificacionDTO certificacionDTO) throws Exception;
     List<EntrenadoresDestacadoDTO> obtenerEntrenadoresDestacados()throws Exception;
     List<CertificadoEntrenadorDTO> obtenerInformacionEntrenador()throws Exception;
+    List<PlanDificultadDTO> listarPlanesPorDificultad() throws Exception;
 }

@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.repositorio.Consultas;
 
 import co.edu.uniquindio.proyecto.dto.entrenador.CertificadoEntrenadorDTO;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanDificultadDTO;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.modelo.entrenador.Entrenador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +14,7 @@ import java.util.List;
 @Repository
 public interface EntrenadorRepo extends JpaRepository<Entrenador, String> {
 
-    /*------------------------------------Consulta Avanzada 2 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Avanzada 2 ok--------------------------------------------------------------------------------3--*/
 
     @Query(value = """
         WITH usuarios_activos AS (
@@ -50,9 +52,9 @@ public interface EntrenadorRepo extends JpaRepository<Entrenador, String> {
     """, nativeQuery = true)
     List<Object[]> obtenerEntrenadoresDestacados();
 
-    /*------------------------------------Consulta Avanzada 2 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Avanzada 2 --------------------------------------------------------------------------------3--*/
 
-    /*------------------------------------Consulta Intermedia 2 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Intermedia 2 ok--------------------------------------------------------------------------------4--*/
 
     @Query(value = """
     SELECT 
@@ -68,6 +70,19 @@ public interface EntrenadorRepo extends JpaRepository<Entrenador, String> {
     List<CertificadoEntrenadorDTO> obtenerInfoEntrenadorPorId(@Param("usuarioId") String usuarioId);
 
 
-    /*------------------------------------Consulta Intermedia 2 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Intermedia 2 -------------------------------------------------------------------------------4---*/
+
+    /*------------------------------------Consulta Simple 1 ---------------------------------------------------------------------------------5-*/
+
+    @Query(value = """
+        SELECT p.dificultad, p.nombre 
+        FROM plan_entrenamiento p 
+        ORDER BY p.dificultad, p.nombre
+        """, nativeQuery = true)
+    List<PlanDificultadDTO> obtenerPlanesPorDificultad();
+
+    /*------------------------------------Consulta Simple 1 ---------------------------------------------------------------------------------5-*/
+
+
 
 }

@@ -4,6 +4,8 @@ package co.edu.uniquindio.proyecto.controladores;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.entrenador.*;
 import co.edu.uniquindio.proyecto.dto.planEntrenamiento.CrearPlanEntrenamientoDTO;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanDificultadDTO;
+import co.edu.uniquindio.proyecto.dto.planEntrenamiento.PlanEntrenamientoDTO;
 import co.edu.uniquindio.proyecto.servicios.EntrenadorServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -72,6 +74,14 @@ public class EntrenadorControlador {
     public ResponseEntity<MensajeDTO<List<CertificadoEntrenadorDTO>>> obtenerInformacionEntrenador()throws Exception{
         List<CertificadoEntrenadorDTO> certificadoEntrenadorDTOS=entrenadorServicio.obtenerInformacionEntrenador();
         return ResponseEntity.ok(new MensajeDTO<>(true, certificadoEntrenadorDTOS));
+    }
+
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping("/planes/dificultad")
+    @Operation(summary="Obtener planes por dificultad")
+    public ResponseEntity<MensajeDTO<List<PlanDificultadDTO>>> obtenerPlanesDificultad()throws Exception{
+        List<PlanDificultadDTO> planesDificultad=entrenadorServicio.listarPlanesPorDificultad();
+        return ResponseEntity.ok(new MensajeDTO<>(true, planesDificultad));
     }
 
 

@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface ClienteRepo extends JpaRepository<Cliente, String> {
 
-    /*------------------------------------Consulta Avanzada 1 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Avanzada 1 ok ---------------------------------------------------------------------------------1-*/
 
     @Query(value = """
 
@@ -43,7 +43,7 @@ public interface ClienteRepo extends JpaRepository<Cliente, String> {
     RecomendacionEntrenamientoDTO obtenerRecomendacionPorEdad(@Param("usuarioId") String usuarioId);
     /*------------------------------------Consulta Avanzada 1 ----------------------------------------------------------------------------------*/
 
-    /*------------------------------------Consulta Intermedia 1 ----------------------------------------------------------------------------------*/
+    /*------------------------------------Consulta Intermedia 1 ok --------------------------------------------------------------------------------2--*/
 
     @Query(value = """
     SELECT 
